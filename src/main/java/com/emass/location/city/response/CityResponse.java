@@ -1,6 +1,6 @@
 package com.emass.location.city.response;
 
-import com.emass.location.city.City;
+import com.emass.location.city.components.City;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

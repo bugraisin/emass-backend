@@ -1,6 +1,5 @@
 package com.emass.aspect;
 
-import com.emass.location.city.City;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
