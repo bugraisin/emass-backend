@@ -36,7 +36,7 @@ public class LocationController {
                 .orElse(null);
     }
 
-    @PostMapping("/selected_city")
+    @PostMapping("/selected-city")
     public void postSelectedCity(@RequestBody City city) {
         this.city.setId(city.getId());
         this.city.setName(city.getName());
@@ -48,19 +48,19 @@ public class LocationController {
         return locationServiceImpl.getAllDistrictsByCity(this.city);
     }
 
-    @PostMapping("/selected_district")
+    @PostMapping("/selected-district")
     public void postSelectedCity(@RequestBody District district) {
-        district.setId(district.getId());
-        district.setName(district.getName());
+        this.district.setId(district.getId());
+        this.district.setName(district.getName());
         System.out.println("Received ID: " + district.getId() + ", Name: " + district.getName());
     }
 
     @GetMapping("/neighbourhoods")
     public List<Neighbourhood> getAllNeighbourhood() {
-        return locationServiceImpl.getAllNeighbourhoods(this.district);
+        return locationServiceImpl.getAllNeighbourhoodsByDistrict(this.district);
     }
 
-    @PostMapping("/selected_neighbourhood")
+    @PostMapping("/selected-neighbourhood")
     public void postSelectedCity(@RequestBody Neighbourhood neighbourhood) {
         neighbourhood.setId(neighbourhood.getId());
         neighbourhood.setName(neighbourhood.getName());

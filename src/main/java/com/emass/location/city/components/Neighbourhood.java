@@ -3,6 +3,7 @@ package com.emass.location.city.components;
 public class Neighbourhood {
     private Long id;
     private String name;
+    private String district;
 
     public Long getId() {
         return id;
@@ -18,5 +19,13 @@ public class Neighbourhood {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getDistrict() {
+        return district;
+    }
+
+    public void setDistrict(String district) {
+        this.district = district;
     }
 }

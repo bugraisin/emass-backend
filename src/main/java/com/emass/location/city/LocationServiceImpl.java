@@ -4,6 +4,7 @@ import com.emass.location.city.components.City;
 import com.emass.location.city.components.District;
 import com.emass.location.city.components.Neighbourhood;
 import com.emass.location.city.response.DistrictResponse;
+import com.emass.location.city.response.NeighbourhoodResponse;
 import com.emass.service.LocationService;
 import com.emass.location.city.response.CityResponse;
 import org.springframework.stereotype.Service;
@@ -37,8 +38,12 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public List<Neighbourhood> getAllNeighbourhoods(District district) {
-        return List.of();
+    public List<Neighbourhood> getAllNeighbourhoodsByDistrict(District district) {
+        String url = "https://turkiyeapi.herokuapp.com/api/v1/neighborhoods";
+        NeighbourhoodResponse response = restTemplate.getForObject(url, NeighbourhoodResponse.class);
+        return response.getData().stream()
+                .filter(neighbourhood -> neighbourhood.getDistrict().equalsIgnoreCase(district.getName()))
+                .collect(Collectors.toList());
     }
 
 

@@ -13,6 +13,6 @@ public interface LocationService {
 
     List<District> getAllDistrictsByCity(City city);
 
-    List<Neighbourhood> getAllNeighbourhoods(District district);
+    List<Neighbourhood> getAllNeighbourhoodsByDistrict(District district);
 
 }
