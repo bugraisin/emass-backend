@@ -1,15 +1,15 @@
-package com.emass.location.city.response;
+package com.emass.location.response;
 
-import com.emass.location.city.components.Neighbourhood;
+import com.emass.location.components.District;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class NeighbourhoodResponse {
+public class DistrictResponse {
     private String status;
-    private List<Neighbourhood> data;
+    private List<District> data;
 
     @JsonProperty("status")
     public String getStatus() {
@@ -21,11 +21,11 @@ public class NeighbourhoodResponse {
     }
 
     @JsonProperty("data")
-    public List<Neighbourhood> getData() {
+    public List<District> getData() {
         return data;
     }
 
-    public void setData(List<Neighbourhood> data) {
+    public void setData(List<District> data) {
         this.data = data;
     }
 }

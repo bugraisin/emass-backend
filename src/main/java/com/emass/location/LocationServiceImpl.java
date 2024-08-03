@@ -1,12 +1,12 @@
-package com.emass.location.city;
+package com.emass.location;
 
-import com.emass.location.city.components.City;
-import com.emass.location.city.components.District;
-import com.emass.location.city.components.Neighbourhood;
-import com.emass.location.city.response.DistrictResponse;
-import com.emass.location.city.response.NeighbourhoodResponse;
+import com.emass.location.components.City;
+import com.emass.location.components.District;
+import com.emass.location.components.Neighbourhood;
+import com.emass.location.response.DistrictResponse;
+import com.emass.location.response.NeighbourhoodResponse;
 import com.emass.service.LocationService;
-import com.emass.location.city.response.CityResponse;
+import com.emass.location.response.CityResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 

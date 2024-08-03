@@ -1,9 +1,8 @@
-package com.emass.location.city.components;
+package com.emass.location.components;
 
-public class District {
+public class City {
     private Long id;
     private String name;
-    private String province;
 
     public Long getId() {
         return id;
@@ -21,11 +20,4 @@ public class District {
         this.name = name;
     }
 
-    public String getProvince() {
-        return province;
-    }
-
-    public void setProvince(String province) {
-        this.province = province;
-    }
 }

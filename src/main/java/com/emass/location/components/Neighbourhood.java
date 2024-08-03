@@ -1,4 +1,4 @@
-package com.emass.location.city.components;
+package com.emass.location.components;
 
 public class Neighbourhood {
     private Long id;

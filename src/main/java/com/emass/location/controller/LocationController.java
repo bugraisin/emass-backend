@@ -1,9 +1,9 @@
-package com.emass.location.city.controller;
+package com.emass.location.controller;
 
-import com.emass.location.city.components.City;
-import com.emass.location.city.components.District;
-import com.emass.location.city.LocationServiceImpl;
-import com.emass.location.city.components.Neighbourhood;
+import com.emass.location.components.City;
+import com.emass.location.components.District;
+import com.emass.location.LocationServiceImpl;
+import com.emass.location.components.Neighbourhood;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

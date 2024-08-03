@@ -1,8 +1,8 @@
 package com.emass.service;
 
-import com.emass.location.city.components.City;
-import com.emass.location.city.components.District;
-import com.emass.location.city.components.Neighbourhood;
+import com.emass.location.components.City;
+import com.emass.location.components.District;
+import com.emass.location.components.Neighbourhood;
 
 
 import java.util.List;
