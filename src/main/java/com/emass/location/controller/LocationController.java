@@ -14,6 +14,7 @@ public class LocationController {
 
     private final City city;
     private final District district;
+    private final Neighbourhood neighbourhood;
     private final LocationServiceImpl locationServiceImpl;
 
     @Autowired
@@ -21,6 +22,7 @@ public class LocationController {
         this.locationServiceImpl = locationServiceImpl;
         city = new City();
         district = new District();
+        neighbourhood = new Neighbourhood();
     }
 
     @GetMapping("/cities")
@@ -40,19 +42,18 @@ public class LocationController {
     public void postSelectedCity(@RequestBody City city) {
         this.city.setId(city.getId());
         this.city.setName(city.getName());
-        System.out.println("Received city ID: " + this.city.getId() + ", City Name: " + this.city.getName());
     }
 
     @GetMapping("/districts")
-    public List<District> getAllDistrictsByCity() {
+    public List<District> getAllDistricts() {
         return locationServiceImpl.getAllDistrictsByCity(this.city);
     }
 
     @PostMapping("/selected-district")
-    public void postSelectedCity(@RequestBody District district) {
+    public void postSelectedDistrict(@RequestBody District district) {
         this.district.setId(district.getId());
         this.district.setName(district.getName());
-        System.out.println("Received ID: " + district.getId() + ", Name: " + district.getName());
+        this.district.setProvince(district.getProvince());
     }
 
     @GetMapping("/neighbourhoods")
@@ -61,10 +62,10 @@ public class LocationController {
     }
 
     @PostMapping("/selected-neighbourhood")
-    public void postSelectedCity(@RequestBody Neighbourhood neighbourhood) {
-        neighbourhood.setId(neighbourhood.getId());
-        neighbourhood.setName(neighbourhood.getName());
-        System.out.println("Received ID: " + neighbourhood.getId() + ", Name: " + neighbourhood.getName());
+    public void postSelectedNeighbourhood(@RequestBody Neighbourhood neighbourhood) {
+        this.neighbourhood.setId(neighbourhood.getId());
+        this.neighbourhood.setName(neighbourhood.getName());
+        this.neighbourhood.setDistrict(neighbourhood.getDistrict());
     }
 
 
