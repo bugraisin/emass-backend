@@ -1,7 +1,7 @@
 package com.emass.emass_backend.controller;
 
-import com.emass.emass_backend.model.dto.LoginRequest;
-import com.emass.emass_backend.model.dto.RegisterRequest;
+import com.emass.emass_backend.model.dto.auth.LoginRequest;
+import com.emass.emass_backend.model.dto.auth.RegisterRequest;
 import com.emass.emass_backend.model.entity.User;
 import com.emass.emass_backend.service.AuthService;
 import jakarta.validation.Valid;
