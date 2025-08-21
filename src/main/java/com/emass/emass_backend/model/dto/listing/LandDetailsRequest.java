@@ -5,11 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public record LandDetailsRequest(
-        @NotNull LandSubtype subtype,        // RESIDENTIAL_LAND, COMMERCIAL_LAND, FIELD, ...
-
-        Integer areaM2,
-        @Size(max = 40) String zoning,
-        @Size(max = 50) String parcelNo,
-        @Size(max = 50) String blockNo
-) {
-}
+        @NotNull LandSubtype subtype,
+        Integer totalArea,
+        String zoningStatus,
+        Boolean electricity,
+        Boolean water,
+        Boolean roadAccess,
+        String titleDeedStatus
+) {}

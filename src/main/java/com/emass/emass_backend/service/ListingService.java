@@ -18,6 +18,8 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class ListingService {
@@ -28,22 +30,19 @@ public class ListingService {
     private final WorkplaceDetailsRepository workplaceDetailsRepository;
     private final LandDetailsRepository landDetailsRepository;
 
-    private final ListingMapper listingMapper;           // ortak alanlar + response
-    private final ListingDetailsMapper detailsMapper;    // tür-özgü detay map
+    private final ListingMapper listingMapper;
+    private final ListingDetailsMapper detailsMapper;
 
     @Transactional
     public ListingResponse create(ListingCreateRequest req) {
-        // 1) İlan sahibi
+
         var owner = userRepository.findById(req.ownerId())
                 .orElseThrow(() -> new IllegalArgumentException("Owner not found: " + req.ownerId()));
 
-        // 2) Ortak alanlar
         Listing listing = listingMapper.toListingEntity(req);
         listing.setOwner(owner);
-        // enum’ları STRING olarak sakladığına emin ol: @Enumerated(EnumType.STRING)
         Listing saved = listingRepository.save(listing);
 
-        // 3) Tür-özgü detay + response
         if (req.propertyType() == PropertyType.KONUT) {
             HousingDetails d = detailsMapper.toEntity(saved, req.housingDetails());
             if (d != null) housingDetailsRepository.save(d);
@@ -62,4 +61,48 @@ public class ListingService {
 
         throw new IllegalArgumentException("Unsupported property type: " + req.propertyType());
     }
+
+    public ListingResponse getById(Long id) {
+        Listing listing = listingRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Listing not found: " + id));
+
+        if (listing.getPropertyType() == PropertyType.KONUT) {
+            HousingDetails d = housingDetailsRepository.findByListingId(id).orElse(null);
+            return listingMapper.toResponse(listing, d);
+
+        } else if (listing.getPropertyType() == PropertyType.ISYERI) {
+            WorkplaceDetails d = workplaceDetailsRepository.findByListingId(id).orElse(null);
+            return listingMapper.toResponse(listing, d);
+
+        } else if (listing.getPropertyType() == PropertyType.ARSA) {
+            LandDetails d = landDetailsRepository.findByListingId(id).orElse(null);
+            return listingMapper.toResponse(listing, d);
+        }
+
+        throw new IllegalArgumentException("Unsupported property type: " + listing.getPropertyType());
+    }
+
+    public List<ListingResponse> getAll() {
+        List<Listing> listings = listingRepository.findAll();
+
+        return listings.stream().map(listing -> {
+            Long id = listing.getId();
+
+            if (listing.getPropertyType() == PropertyType.KONUT) {
+                HousingDetails d = housingDetailsRepository.findByListingId(id).orElse(null);
+                return listingMapper.toResponse(listing, d);
+
+            } else if (listing.getPropertyType() == PropertyType.ISYERI) {
+                WorkplaceDetails d = workplaceDetailsRepository.findByListingId(id).orElse(null);
+                return listingMapper.toResponse(listing, d);
+
+            } else if (listing.getPropertyType() == PropertyType.ARSA) {
+                LandDetails d = landDetailsRepository.findByListingId(id).orElse(null);
+                return listingMapper.toResponse(listing, d);
+            }
+
+            throw new IllegalArgumentException("Unsupported property type: " + listing.getPropertyType());
+        }).toList();
+    }
+
 }

@@ -22,7 +22,6 @@ public class Listing {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // ilan sahibi
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User owner;
@@ -35,16 +34,16 @@ public class Listing {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "listing_type", nullable = false, length = 20)
-    private ListingType listingType;   // SALE | RENT (ileride enum’a çevrilebilir)
+    private ListingType listingType;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "property_type", nullable = false, length = 20)
-    private PropertyType propertyType;  // KONUT | ISYERI | ARSA (ileride enum’a çevrilebilir)
+    private PropertyType propertyType;
 
     @Column(nullable = false, precision = 14, scale = 2)
     private BigDecimal price;
 
-    // location fields
+    // Location fields
     @Column(nullable = false, length = 100)
     private String city;
 
@@ -53,7 +52,6 @@ public class Listing {
 
     private String neighborhood;
     private String addressText;
-
     private Double latitude;
     private Double longitude;
 

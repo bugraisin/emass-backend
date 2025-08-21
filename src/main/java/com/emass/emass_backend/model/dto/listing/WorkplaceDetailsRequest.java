@@ -3,12 +3,17 @@ package com.emass.emass_backend.model.dto.listing;
 import com.emass.emass_backend.model.entity.enums.WorkplaceSubtype;
 import jakarta.validation.constraints.NotNull;
 
-public record WorkplaceDetailsRequest(
-        @NotNull WorkplaceSubtype subtype,   // SHOP, OFFICE, WAREHOUSE, ...
+import java.math.BigDecimal;
 
-        Integer usableAreaM2,
+public record WorkplaceDetailsRequest(
+        @NotNull WorkplaceSubtype subtype,
+        Integer netArea,
         Integer floorNo,
-        Double frontageM,
-        Double ceilingHM
-) {
-}
+        Integer buildingAge,
+        Boolean furnished,
+        Boolean parking,
+        Boolean airConditioning,
+        Boolean kitchen,
+        Integer seatingCapacity,
+        BigDecimal maintenanceFee
+) {}

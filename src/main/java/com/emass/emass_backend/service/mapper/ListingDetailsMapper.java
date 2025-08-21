@@ -14,42 +14,54 @@ public class ListingDetailsMapper {
 
     public HousingDetails toEntity(Listing listing, HousingDetailsRequest req) {
         if (listing == null || req == null) return null;
+
         var d = new HousingDetails();
         d.setListing(listing);
-
-        // DTO alan isimleri ile entity alanlarını eşleştiriyoruz:
-        // record: subtype, roomPlan, floorNo, totalFloors, buildingAge, furnished, netAreaM2, grossAreaM2
-        d.setRooms(req.roomPlan());
-        d.setFloor(req.floorNo());
+        d.setSubtype(req.subtype());
+        d.setRoomPlan(req.roomPlan());
+        d.setNetArea(req.netArea());
+        d.setFloorNo(req.floorNo());
         d.setTotalFloors(req.totalFloors());
         d.setBuildingAge(req.buildingAge());
-        d.setIsFurnished(req.furnished());
-        // net/gross area entity’de yok → atlanır
+        d.setFurnished(req.furnished());
+        d.setBalcony(req.balcony());
+        d.setParking(req.parking());
+        d.setHeatingType(req.heatingType());
+        d.setSiteName(req.siteName());
+        d.setSiteFee(req.siteFee());
         return d;
     }
 
     public WorkplaceDetails toEntity(Listing listing, WorkplaceDetailsRequest req) {
         if (listing == null || req == null) return null;
+
         var d = new WorkplaceDetails();
         d.setListing(listing);
-
-        // record: subtype, usableAreaM2, floorNo, frontageM, ceilingHM
-        d.setAreaM2(req.usableAreaM2());
-        // entity’de floorNo/frontage/ceiling alanları yok → atlanır
-        // isFurnished/hasParking DTO’da yok; gerekirse ayrı uçtan yönetirsiniz
+        d.setSubtype(req.subtype());
+        d.setNetArea(req.netArea());
+        d.setFloorNo(req.floorNo());
+        d.setBuildingAge(req.buildingAge());
+        d.setFurnished(req.furnished());
+        d.setParking(req.parking());
+        d.setAirConditioning(req.airConditioning());
+        d.setKitchen(req.kitchen());
+        d.setSeatingCapacity(req.seatingCapacity());
+        d.setMaintenanceFee(req.maintenanceFee());
         return d;
     }
 
     public LandDetails toEntity(Listing listing, LandDetailsRequest req) {
         if (listing == null || req == null) return null;
+
         var d = new LandDetails();
         d.setListing(listing);
-
-        // record: subtype, areaM2, zoning, parcelNo, blockNo
-        d.setLandAreaM2(req.areaM2());
-        d.setZoningStatus(req.zoning());
-        d.setParcelNo(req.parcelNo());
-        // entity’de blockNo yok → atlanır
+        d.setSubtype(req.subtype());
+        d.setTotalArea(req.totalArea());
+        d.setZoningStatus(req.zoningStatus());
+        d.setElectricity(req.electricity());
+        d.setWater(req.water());
+        d.setRoadAccess(req.roadAccess());
+        d.setTitleDeedStatus(req.titleDeedStatus());
         return d;
     }
 }

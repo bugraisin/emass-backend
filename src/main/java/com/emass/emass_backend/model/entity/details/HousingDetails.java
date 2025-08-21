@@ -1,8 +1,13 @@
 package com.emass.emass_backend.model.entity.details;
 
 import com.emass.emass_backend.model.entity.Listing;
+import com.emass.emass_backend.model.entity.enums.HeatingType;
+import com.emass.emass_backend.model.entity.enums.HousingSubtype;
+import com.emass.emass_backend.model.entity.enums.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.math.BigDecimal;
 
 @Entity
 @Table(name = "housing_details")
@@ -12,20 +17,28 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class HousingDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // 1-1 ilişki Listing ile
     @OneToOne
     @JoinColumn(name = "listing_id", nullable = false)
     private Listing listing;
 
-    @Column(name = "rooms", length = 10)  // "3+1" gibi
-    private String rooms;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "subtype", nullable = false)
+    private HousingSubtype subtype;
 
-    @Column(name = "floor")
-    private Integer floor;
+    // Temel bilgiler
+    @Column(name = "room_plan", length = 10)  // "3+1" gibi
+    private String roomPlan;
+
+    @Column(name = "net_area")
+    private Integer netArea;
+
+    @Column(name = "floor_no")
+    private Integer floorNo;
 
     @Column(name = "total_floors")
     private Integer totalFloors;
@@ -33,6 +46,24 @@ public class HousingDetails {
     @Column(name = "building_age")
     private Integer buildingAge;
 
-    @Column(name = "is_furnished")
-    private Boolean isFurnished;
+    // Temel özellikler
+    @Column(name = "furnished")
+    private Boolean furnished;
+
+    @Column(name = "balcony")
+    private Boolean balcony;
+
+    @Column(name = "parking")
+    private Boolean parking;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "heating_type")
+    private HeatingType heatingType;
+
+    // Site bilgisi (opsiyonel)
+    @Column(name = "site_name", length = 100)
+    private String siteName;
+
+    @Column(name = "site_fee")
+    private BigDecimal siteFee;
 }

@@ -55,16 +55,20 @@ public class ListingMapper {
                 l.getCreatedAt(),
                 l.getUpdatedAt(),
 
-                // HousingDetailsResponse — entity’de birebir olmayan alanlar null bırakıldı
+                // HousingDetailsResponse - Basit yapı
                 d == null ? null : new ListingResponse.HousingDetailsResponse(
-                        /* subtype       */ null,
-                        /* roomPlan      */ d.getRooms(),
-                        /* floorNo       */ d.getFloor(),
+                        /* subtype       */ d.getSubtype(),
+                        /* roomPlan      */ d.getRoomPlan(),
+                        /* netArea       */ d.getNetArea(),
+                        /* floorNo       */ d.getFloorNo(),
                         /* totalFloors   */ d.getTotalFloors(),
                         /* buildingAge   */ d.getBuildingAge(),
-                        /* furnished     */ d.getIsFurnished(),
-                        /* netAreaM2     */ null,
-                        /* grossAreaM2   */ null
+                        /* furnished     */ d.getFurnished(),
+                        /* balcony       */ d.getBalcony(),
+                        /* parking       */ d.getParking(),
+                        /* heatingType   */ d.getHeatingType(),
+                        /* siteName      */ d.getSiteName(),
+                        /* siteFee       */ d.getSiteFee()
                 ),
                 null,
                 null
@@ -100,11 +104,16 @@ public class ListingMapper {
 
                 null,
                 d == null ? null : new ListingResponse.WorkplaceDetailsResponse(
-                        /* subtype       */ null,
-                        /* usableAreaM2  */ d.getAreaM2(),
-                        /* floorNo       */ null,
-                        /* frontageM     */ null,
-                        /* ceilingHM     */ null
+                        /* subtype         */ d.getSubtype(),
+                        /* netArea         */ d.getNetArea(),
+                        /* floorNo         */ d.getFloorNo(),
+                        /* buildingAge     */ d.getBuildingAge(),
+                        /* furnished       */ d.getFurnished(),
+                        /* parking         */ d.getParking(),
+                        /* airConditioning */ d.getAirConditioning(),
+                        /* kitchen         */ d.getKitchen(),
+                        /* seatingCapacity */ d.getSeatingCapacity(),
+                        /* maintenanceFee  */ d.getMaintenanceFee()
                 ),
                 null
         );
@@ -140,11 +149,13 @@ public class ListingMapper {
                 null,
                 null,
                 d == null ? null : new ListingResponse.LandDetailsResponse(
-                        /* subtype   */ null,
-                        /* areaM2    */ d.getLandAreaM2(),
-                        /* zoning    */ d.getZoningStatus(),
-                        /* parcelNo  */ d.getParcelNo(),
-                        /* blockNo   */ null
+                        /* subtype         */ d.getSubtype(),
+                        /* totalArea       */ d.getTotalArea(),
+                        /* zoningStatus    */ d.getZoningStatus(),
+                        /* electricity     */ d.getElectricity(),
+                        /* water           */ d.getWater(),
+                        /* roadAccess      */ d.getRoadAccess(),
+                        /* titleDeedStatus */ d.getTitleDeedStatus()
                 )
         );
     }
