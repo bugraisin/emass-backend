@@ -1,9 +1,9 @@
 package com.emass.emass_backend.controller;
 
-import com.emass.emass_backend.model.entity.District;
-import com.emass.emass_backend.model.entity.Neighborhood;
-import com.emass.emass_backend.model.entity.Province;
-import com.emass.emass_backend.model.entity.Subdistrict;
+import com.emass.emass_backend.model.entity.location.District;
+import com.emass.emass_backend.model.entity.location.Neighborhood;
+import com.emass.emass_backend.model.entity.location.Province;
+import com.emass.emass_backend.model.entity.location.Subdistrict;
 import com.emass.emass_backend.service.LocationService;
 import org.springframework.web.bind.annotation.*;
 

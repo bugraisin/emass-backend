@@ -1,4 +1,4 @@
-package com.emass.emass_backend.model.entity;
+package com.emass.emass_backend.model.entity.location;
 
 import jakarta.persistence.*;
 import lombok.Data;

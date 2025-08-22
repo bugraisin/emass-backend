@@ -1,9 +1,8 @@
-package com.emass.emass_backend.model.entity.details;
+package com.emass.emass_backend.model.entity.listing.details;
 
-import com.emass.emass_backend.model.entity.Listing;
+import com.emass.emass_backend.model.entity.listing.Listing;
 import com.emass.emass_backend.model.entity.enums.HeatingType;
 import com.emass.emass_backend.model.entity.enums.HousingSubtype;
-import com.emass.emass_backend.model.entity.enums.PropertyType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -31,7 +30,7 @@ public class HousingDetails {
     private HousingSubtype subtype;
 
     // Temel bilgiler
-    @Column(name = "room_plan", length = 10)  // "3+1" gibi
+    @Column(name = "room_plan", length = 10)
     private String roomPlan;
 
     @Column(name = "net_area")
@@ -46,7 +45,7 @@ public class HousingDetails {
     @Column(name = "building_age")
     private Integer buildingAge;
 
-    // Temel özellikler
+    // Özellikler
     @Column(name = "furnished")
     private Boolean furnished;
 
@@ -60,7 +59,7 @@ public class HousingDetails {
     @Column(name = "heating_type")
     private HeatingType heatingType;
 
-    // Site bilgisi (opsiyonel)
+    // Site bilgisi
     @Column(name = "site_name", length = 100)
     private String siteName;
 

@@ -1,6 +1,6 @@
 package com.emass.emass_backend.repository;
 
-import com.emass.emass_backend.model.entity.District;
+import com.emass.emass_backend.model.entity.location.District;
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 

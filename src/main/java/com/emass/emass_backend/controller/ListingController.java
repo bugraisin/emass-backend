@@ -34,4 +34,8 @@ public class ListingController {
     public List<ListingResponse> getAll() {
         return listingService.getAll();
     }
+
+
+
+
 }

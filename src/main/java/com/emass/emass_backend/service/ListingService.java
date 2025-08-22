@@ -2,16 +2,11 @@ package com.emass.emass_backend.service;
 
 import com.emass.emass_backend.model.dto.listing.ListingCreateRequest;
 import com.emass.emass_backend.model.dto.listing.ListingResponse;
-import com.emass.emass_backend.model.entity.Listing;
-import com.emass.emass_backend.model.entity.details.HousingDetails;
-import com.emass.emass_backend.model.entity.details.LandDetails;
-import com.emass.emass_backend.model.entity.details.WorkplaceDetails;
-import com.emass.emass_backend.model.entity.enums.PropertyType;
+import com.emass.emass_backend.model.entity.listing.Listing;
+import com.emass.emass_backend.model.entity.listing.details.*;
 import com.emass.emass_backend.repository.ListingRepository;
 import com.emass.emass_backend.repository.UserRepository;
-import com.emass.emass_backend.repository.details.HousingDetailsRepository;
-import com.emass.emass_backend.repository.details.LandDetailsRepository;
-import com.emass.emass_backend.repository.details.WorkplaceDetailsRepository;
+import com.emass.emass_backend.repository.details.*;
 import com.emass.emass_backend.service.mapper.ListingDetailsMapper;
 import com.emass.emass_backend.service.mapper.ListingMapper;
 import jakarta.transaction.Transactional;
@@ -26,8 +21,13 @@ public class ListingService {
 
     private final UserRepository userRepository;
     private final ListingRepository listingRepository;
+
+    // YENİ: Tüm kategori repository'leri
     private final HousingDetailsRepository housingDetailsRepository;
-    private final WorkplaceDetailsRepository workplaceDetailsRepository;
+    private final CommercialDetailsRepository commercialDetailsRepository;
+    private final OfficeDetailsRepository officeDetailsRepository;
+    private final IndustrialDetailsRepository industrialDetailsRepository;
+    private final ServiceDetailsRepository serviceDetailsRepository;
     private final LandDetailsRepository landDetailsRepository;
 
     private final ListingMapper listingMapper;
@@ -43,43 +43,72 @@ public class ListingService {
         listing.setOwner(owner);
         Listing saved = listingRepository.save(listing);
 
-        if (req.propertyType() == PropertyType.KONUT) {
-            HousingDetails d = detailsMapper.toEntity(saved, req.housingDetails());
-            if (d != null) housingDetailsRepository.save(d);
-            return listingMapper.toResponse(saved, d);
-
-        } else if (req.propertyType() == PropertyType.ISYERI) {
-            WorkplaceDetails d = detailsMapper.toEntity(saved, req.workplaceDetails());
-            if (d != null) workplaceDetailsRepository.save(d);
-            return listingMapper.toResponse(saved, d);
-
-        } else if (req.propertyType() == PropertyType.ARSA) {
-            LandDetails d = detailsMapper.toEntity(saved, req.landDetails());
-            if (d != null) landDetailsRepository.save(d);
-            return listingMapper.toResponse(saved, d);
-        }
-
-        throw new IllegalArgumentException("Unsupported property type: " + req.propertyType());
+        // YENİ: 6 kategori için switch-case
+        return switch (req.propertyType()) {
+            case KONUT -> {
+                HousingDetails d = detailsMapper.toEntity(saved, req.housingDetails());
+                if (d != null) housingDetailsRepository.save(d);
+                yield listingMapper.toResponse(saved, d);
+            }
+            case TICARI -> {
+                CommercialDetails d = detailsMapper.toEntity(saved, req.commercialDetails());
+                if (d != null) commercialDetailsRepository.save(d);
+                yield listingMapper.toResponse(saved, d);
+            }
+            case OFIS -> {
+                OfficeDetails d = detailsMapper.toEntity(saved, req.officeDetails());
+                if (d != null) officeDetailsRepository.save(d);
+                yield listingMapper.toResponse(saved, d);
+            }
+            case ENDUSTRIYEL -> {
+                IndustrialDetails d = detailsMapper.toEntity(saved, req.industrialDetails());
+                if (d != null) industrialDetailsRepository.save(d);
+                yield listingMapper.toResponse(saved, d);
+            }
+            case HIZMET -> {
+                ServiceDetails d = detailsMapper.toEntity(saved, req.serviceDetails());
+                if (d != null) serviceDetailsRepository.save(d);
+                yield listingMapper.toResponse(saved, d);
+            }
+            case ARSA -> {
+                LandDetails d = detailsMapper.toEntity(saved, req.landDetails());
+                if (d != null) landDetailsRepository.save(d);
+                yield listingMapper.toResponse(saved, d);
+            }
+        };
     }
 
     public ListingResponse getById(Long id) {
         Listing listing = listingRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Listing not found: " + id));
 
-        if (listing.getPropertyType() == PropertyType.KONUT) {
-            HousingDetails d = housingDetailsRepository.findByListingId(id).orElse(null);
-            return listingMapper.toResponse(listing, d);
-
-        } else if (listing.getPropertyType() == PropertyType.ISYERI) {
-            WorkplaceDetails d = workplaceDetailsRepository.findByListingId(id).orElse(null);
-            return listingMapper.toResponse(listing, d);
-
-        } else if (listing.getPropertyType() == PropertyType.ARSA) {
-            LandDetails d = landDetailsRepository.findByListingId(id).orElse(null);
-            return listingMapper.toResponse(listing, d);
-        }
-
-        throw new IllegalArgumentException("Unsupported property type: " + listing.getPropertyType());
+        // YENİ: 6 kategori için switch-case
+        return switch (listing.getPropertyType()) {
+            case KONUT -> {
+                HousingDetails d = housingDetailsRepository.findByListingId(id).orElse(null);
+                yield listingMapper.toResponse(listing, d);
+            }
+            case TICARI -> {
+                CommercialDetails d = commercialDetailsRepository.findByListingId(id).orElse(null);
+                yield listingMapper.toResponse(listing, d);
+            }
+            case OFIS -> {
+                OfficeDetails d = officeDetailsRepository.findByListingId(id).orElse(null);
+                yield listingMapper.toResponse(listing, d);
+            }
+            case ENDUSTRIYEL -> {
+                IndustrialDetails d = industrialDetailsRepository.findByListingId(id).orElse(null);
+                yield listingMapper.toResponse(listing, d);
+            }
+            case HIZMET -> {
+                ServiceDetails d = serviceDetailsRepository.findByListingId(id).orElse(null);
+                yield listingMapper.toResponse(listing, d);
+            }
+            case ARSA -> {
+                LandDetails d = landDetailsRepository.findByListingId(id).orElse(null);
+                yield listingMapper.toResponse(listing, d);
+            }
+        };
     }
 
     public List<ListingResponse> getAll() {
@@ -88,21 +117,33 @@ public class ListingService {
         return listings.stream().map(listing -> {
             Long id = listing.getId();
 
-            if (listing.getPropertyType() == PropertyType.KONUT) {
-                HousingDetails d = housingDetailsRepository.findByListingId(id).orElse(null);
-                return listingMapper.toResponse(listing, d);
-
-            } else if (listing.getPropertyType() == PropertyType.ISYERI) {
-                WorkplaceDetails d = workplaceDetailsRepository.findByListingId(id).orElse(null);
-                return listingMapper.toResponse(listing, d);
-
-            } else if (listing.getPropertyType() == PropertyType.ARSA) {
-                LandDetails d = landDetailsRepository.findByListingId(id).orElse(null);
-                return listingMapper.toResponse(listing, d);
-            }
-
-            throw new IllegalArgumentException("Unsupported property type: " + listing.getPropertyType());
+            // YENİ: 6 kategori için switch-case
+            return switch (listing.getPropertyType()) {
+                case KONUT -> {
+                    HousingDetails d = housingDetailsRepository.findByListingId(id).orElse(null);
+                    yield listingMapper.toResponse(listing, d);
+                }
+                case TICARI -> {
+                    CommercialDetails d = commercialDetailsRepository.findByListingId(id).orElse(null);
+                    yield listingMapper.toResponse(listing, d);
+                }
+                case OFIS -> {
+                    OfficeDetails d = officeDetailsRepository.findByListingId(id).orElse(null);
+                    yield listingMapper.toResponse(listing, d);
+                }
+                case ENDUSTRIYEL -> {
+                    IndustrialDetails d = industrialDetailsRepository.findByListingId(id).orElse(null);
+                    yield listingMapper.toResponse(listing, d);
+                }
+                case HIZMET -> {
+                    ServiceDetails d = serviceDetailsRepository.findByListingId(id).orElse(null);
+                    yield listingMapper.toResponse(listing, d);
+                }
+                case ARSA -> {
+                    LandDetails d = landDetailsRepository.findByListingId(id).orElse(null);
+                    yield listingMapper.toResponse(listing, d);
+                }
+            };
         }).toList();
     }
-
 }

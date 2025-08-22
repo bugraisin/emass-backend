@@ -1,5 +1,6 @@
-package com.emass.emass_backend.model.entity;
+package com.emass.emass_backend.model.entity.listing;
 
+import com.emass.emass_backend.model.entity.User;
 import com.emass.emass_backend.model.entity.enums.ListingStatus;
 import com.emass.emass_backend.model.entity.enums.ListingType;
 import com.emass.emass_backend.model.entity.enums.PropertyType;

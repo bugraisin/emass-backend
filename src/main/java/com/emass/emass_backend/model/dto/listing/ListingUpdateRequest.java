@@ -1,5 +1,6 @@
 package com.emass.emass_backend.model.dto.listing;
 
+import com.emass.emass_backend.model.dto.listing.details.*;
 import com.emass.emass_backend.model.entity.enums.ListingType;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.*;
@@ -19,7 +20,11 @@ public record ListingUpdateRequest(
         Double latitude,
         Double longitude,
 
+        // YENİ: Tüm kategori detail'leri - sadece biri dolu olacak
         @Valid HousingDetailsRequest housingDetails,
-        @Valid WorkplaceDetailsRequest workplaceDetails,
+        @Valid CommercialDetailsRequest commercialDetails,
+        @Valid OfficeDetailsRequest officeDetails,
+        @Valid IndustrialDetailsRequest industrialDetails,
+        @Valid ServiceDetailsRequest serviceDetails,
         @Valid LandDetailsRequest landDetails
 ) {}

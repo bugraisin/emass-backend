@@ -1,20 +1,19 @@
-package com.emass.emass_backend.model.entity.details;
+package com.emass.emass_backend.model.entity.listing.details;
 
-import com.emass.emass_backend.model.entity.Listing;
-import com.emass.emass_backend.model.entity.enums.WorkplaceSubtype;
+import com.emass.emass_backend.model.entity.listing.Listing;
+import com.emass.emass_backend.model.entity.enums.CommercialSubtype;
 import jakarta.persistence.*;
 import lombok.*;
-
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "workplace_details")
+@Table(name = "commercial_details")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class WorkplaceDetails {
+public class CommercialDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,7 +25,7 @@ public class WorkplaceDetails {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "subtype")
-    private WorkplaceSubtype subtype;
+    private CommercialSubtype subtype;
 
     // Temel bilgiler
     @Column(name = "net_area")
@@ -42,18 +41,38 @@ public class WorkplaceDetails {
     @Column(name = "furnished")
     private Boolean furnished;
 
-    @Column(name = "parking")
-    private Boolean parking;
-
     @Column(name = "air_conditioning")
     private Boolean airConditioning;
 
-    // İş yeri özel (sadece restaurant/kafe için dolu olur)
+    @Column(name = "parking")
+    private Boolean parking;
+
+    // Vitrin özellikleri (dükkan, mağaza için)
+    @Column(name = "showcase")
+    private Boolean showcase;
+
+    @Column(name = "street_frontage")
+    private Integer streetFrontage; // metre
+
+    // Restaurant/Kafe özellikleri
     @Column(name = "kitchen")
     private Boolean kitchen;
 
     @Column(name = "seating_capacity")
     private Integer seatingCapacity;
+
+    @Column(name = "outdoor_seating")
+    private Boolean outdoorSeating;
+
+    @Column(name = "liquor_license")
+    private Boolean liquorLicense;
+
+    // Güzellik salonu özellikleri
+    @Column(name = "treatment_room_count")
+    private Integer treatmentRoomCount;
+
+    @Column(name = "waiting_area")
+    private Boolean waitingArea;
 
     // Maliyet
     @Column(name = "maintenance_fee")

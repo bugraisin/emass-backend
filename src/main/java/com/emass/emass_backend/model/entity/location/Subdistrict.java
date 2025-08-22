@@ -1,12 +1,12 @@
-package com.emass.emass_backend.model.entity;
+package com.emass.emass_backend.model.entity.location;
 
 import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
-@Table(name = "neighborhoods")
+@Table(name = "subdistricts")
 @Data
-public class Neighborhood {
+public class Subdistrict {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,11 +19,5 @@ public class Neighborhood {
 
     @Column(name = "district_id")
     private Long districtId;
-
-    @Column(name = "subdistrict_id")
-    private Long subdistrictId;
-
-    @Column(name = "postal_code")
-    private String postalCode;
 
 }

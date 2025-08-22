@@ -1,5 +1,5 @@
-package com.emass.emass_backend.model.entity.details;
-import com.emass.emass_backend.model.entity.Listing;
+package com.emass.emass_backend.model.entity.listing.details;
+import com.emass.emass_backend.model.entity.listing.Listing;
 import com.emass.emass_backend.model.entity.enums.LandSubtype;
 import jakarta.persistence.*;
 import lombok.*;
@@ -25,14 +25,14 @@ public class LandDetails {
     @Column(name = "subtype")
     private LandSubtype subtype;
 
-    // Temel bilgiler
+    // Alan bilgileri
     @Column(name = "total_area")
     private Integer totalArea; // m²
 
     @Column(name = "zoning_status", length = 100)
     private String zoningStatus;
 
-    // Temel altyapı
+    // Altyapı
     @Column(name = "electricity")
     private Boolean electricity;
 
@@ -44,5 +44,5 @@ public class LandDetails {
 
     // Sahiplik
     @Column(name = "title_deed_status", length = 50)
-    private String titleDeedStatus; // "TAPULU", "TAHSİSLİ"
+    private String titleDeedStatus;
 }
