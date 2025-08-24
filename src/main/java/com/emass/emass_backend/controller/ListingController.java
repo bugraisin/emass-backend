@@ -23,6 +23,7 @@ public class ListingController {
     private final CommercialDetailsService commercialDetailsService;
     private final IndustrialDetailsService industrialDetailsService;
     private final ServiceDetailsService serviceDetailsService;
+    private final LandDetailsService landDetailsService;
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
@@ -58,6 +59,12 @@ public class ListingController {
     @ResponseStatus(HttpStatus.OK)
     public List<ListingResponse> search(@Valid @ModelAttribute ServiceSearchRequest request) {
         return serviceDetailsService.search(request);
+    }
+
+    @GetMapping("/search/land")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ListingResponse> search(@Valid @ModelAttribute LandSearchRequest request) {
+        return landDetailsService.search(request);
     }
 
     @GetMapping("/{id}")
