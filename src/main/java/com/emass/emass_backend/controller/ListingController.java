@@ -2,15 +2,9 @@ package com.emass.emass_backend.controller;
 
 import com.emass.emass_backend.model.dto.listing.ListingCreateRequest;
 import com.emass.emass_backend.model.dto.listing.ListingResponse;
-import com.emass.emass_backend.model.dto.listing.details.search.CommercialSearchRequest;
-import com.emass.emass_backend.model.dto.listing.details.search.HouseSearchRequest;
-import com.emass.emass_backend.model.dto.listing.details.search.IndustrialSearchRequest;
-import com.emass.emass_backend.model.dto.listing.details.search.OfficeSearchRequest;
+import com.emass.emass_backend.model.dto.listing.details.search.*;
 import com.emass.emass_backend.service.ListingService;
-import com.emass.emass_backend.service.details.CommercialDetailsService;
-import com.emass.emass_backend.service.details.HousingDetailsService;
-import com.emass.emass_backend.service.details.IndustrialDetailsService;
-import com.emass.emass_backend.service.details.OfficeDetailsService;
+import com.emass.emass_backend.service.details.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -28,6 +22,7 @@ public class ListingController {
     private final OfficeDetailsService officeDetailsService;
     private final CommercialDetailsService commercialDetailsService;
     private final IndustrialDetailsService industrialDetailsService;
+    private final ServiceDetailsService serviceDetailsService;
 
     @PostMapping("/create")
     @ResponseStatus(HttpStatus.CREATED)
@@ -57,6 +52,12 @@ public class ListingController {
     @ResponseStatus(HttpStatus.OK)
     public List<ListingResponse> search(@Valid @ModelAttribute IndustrialSearchRequest request) {
         return industrialDetailsService.search(request);
+    }
+
+    @GetMapping("/search/service")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ListingResponse> search(@Valid @ModelAttribute ServiceSearchRequest request) {
+        return serviceDetailsService.search(request);
     }
 
     @GetMapping("/{id}")
