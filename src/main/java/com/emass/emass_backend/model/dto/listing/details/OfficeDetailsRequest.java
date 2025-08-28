@@ -1,25 +1,38 @@
 package com.emass.emass_backend.model.dto.listing.details;
 
 import com.emass.emass_backend.model.entity.enums.OfficeSubtype;
+import com.emass.emass_backend.model.entity.enums.details.HeatingType;
+import com.emass.emass_backend.model.entity.enums.details.BuildingType;
 
 import java.math.BigDecimal;
 
 public record OfficeDetailsRequest(
         OfficeSubtype subtype,
         Integer netArea,
-        Integer floorNo,
-        Integer buildingAge,
+        String buildingAge,
         Integer roomCount,
-        Integer meetingRoomCount,
+        Integer floorNo,
+        Integer floorCount,
+        HeatingType heatingType,
+        BigDecimal siteFee,
+        BigDecimal deposit,
+        BuildingType buildingType,
         Boolean furnished,
-        Boolean airConditioning,
         Boolean parking,
-        String businessCenter,
+        Boolean elevator,
+        Boolean security,
+        Boolean generator,
+        Boolean airConditioning,
+        Boolean internet,
+        Boolean kitchen,
+        Boolean fireSystem,
         Boolean reception,
-        Integer deskCount,
-        Integer privateOfficeCount,
-        Integer workstationCount,
-        Boolean soundIsolation,
-        BigDecimal maintenanceFee,
-        Boolean internetIncluded
+        Boolean waitingArea,
+        Boolean meetingRoom,
+        Boolean archive,
+        Boolean library,
+        Boolean serverRoom,
+        Boolean accessControl,
+        Boolean fiberInternet,
+        Boolean soundproof
 ) {}

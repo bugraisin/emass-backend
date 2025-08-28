@@ -1,5 +1,4 @@
 package com.emass.emass_backend.service.mapper;
-
 import com.emass.emass_backend.model.dto.listing.ListingCreateRequest;
 import com.emass.emass_backend.model.dto.listing.ListingResponse;
 import com.emass.emass_backend.model.entity.listing.Listing;
@@ -53,23 +52,45 @@ public class ListingMapper {
                 // HousingDetailsResponse
                 d == null ? null : new ListingResponse.HousingDetailsResponse(
                         d.getSubtype(),
-                        d.getRoomPlan(),
+                        d.getRoomCount(),
+                        d.getGrossArea(),
                         d.getNetArea(),
                         d.getFloorNo(),
                         d.getTotalFloors(),
                         d.getBuildingAge(),
+                        d.getBathroomCount(),
+                        d.getHeatingType(),
+                        d.getFacadeDirection(),
+                        d.getTitleDeedStatus(),
+                        d.getUsageStatus(),
+                        d.getSiteName(),
+                        d.getSiteFee(),
+                        d.getDeposit(),
                         d.getFurnished(),
                         d.getBalcony(),
-                        d.getParking(),
-                        d.getHeatingType(),
-                        d.getSiteName(),
-                        d.getSiteFee()
+                        d.getTerrace(),
+                        d.getGarden(),
+                        d.getWithinSite(),
+                        d.getOpenPark(),
+                        d.getClosedPark(),
+                        d.getGaragePark(),
+                        d.getElevator(),
+                        d.getSecurity(),
+                        d.getConcierge(),
+                        d.getGenerator(),
+                        d.getAirConditioning(),
+                        d.getFloorHeating(),
+                        d.getFireplace(),
+                        d.getBuiltinKitchen(),
+                        d.getSeparateKitchen(),
+                        d.getAmericanKitchen(),
+                        d.getLaundryRoom(),
+                        d.getPool(),
+                        d.getGym(),
+                        d.getChildrenPlayground(),
+                        d.getSportsArea()
                 ),
-                null, // commercialDetails
-                null, // officeDetails
-                null, // industrialDetails
-                null, // serviceDetails
-                null  // landDetails
+                null, null, null, null, null
         );
     }
 
@@ -100,25 +121,32 @@ public class ListingMapper {
                 d == null ? null : new ListingResponse.CommercialDetailsResponse(
                         d.getSubtype(),
                         d.getNetArea(),
-                        d.getFloorNo(),
                         d.getBuildingAge(),
+                        d.getRoomCount(),
+                        d.getFloorNo(),
+                        d.getFloorCount(),
+                        d.getHeatingType(),
+                        d.getSiteFee(),
+                        d.getDeposit(),
+                        d.getBuildingType(),
                         d.getFurnished(),
-                        d.getAirConditioning(),
                         d.getParking(),
-                        d.getShowcase(),
-                        d.getStreetFrontage(),
+                        d.getSecurity(),
+                        d.getElevator(),
+                        d.getGenerator(),
+                        d.getAirConditioning(),
+                        d.getInternet(),
                         d.getKitchen(),
-                        d.getSeatingCapacity(),
+                        d.getToilet(),
+                        d.getShowcase(),
+                        d.getWarehouse(),
+                        d.getLoadingDock(),
+                        d.getCashRegister(),
                         d.getOutdoorSeating(),
-                        d.getLiquorLicense(),
-                        d.getTreatmentRoomCount(),
                         d.getWaitingArea(),
-                        d.getMaintenanceFee()
+                        d.getChangingRoom()
                 ),
-                null, // officeDetails
-                null, // industrialDetails
-                null, // serviceDetails
-                null  // landDetails
+                null, null, null, null
         );
     }
 
@@ -150,25 +178,34 @@ public class ListingMapper {
                 d == null ? null : new ListingResponse.OfficeDetailsResponse(
                         d.getSubtype(),
                         d.getNetArea(),
-                        d.getFloorNo(),
                         d.getBuildingAge(),
                         d.getRoomCount(),
-                        d.getMeetingRoomCount(),
+                        d.getFloorNo(),
+                        d.getFloorCount(),
+                        d.getHeatingType(),
+                        d.getSiteFee(),
+                        d.getDeposit(),
+                        d.getBuildingType(),
                         d.getFurnished(),
-                        d.getAirConditioning(),
                         d.getParking(),
-                        d.getBusinessCenter(),
+                        d.getElevator(),
+                        d.getSecurity(),
+                        d.getGenerator(),
+                        d.getAirConditioning(),
+                        d.getInternet(),
+                        d.getKitchen(),
+                        d.getFireSystem(),
                         d.getReception(),
-                        d.getDeskCount(),
-                        d.getPrivateOfficeCount(),
-                        d.getWorkstationCount(),
-                        d.getSoundIsolation(),
-                        d.getMaintenanceFee(),
-                        d.getInternetIncluded()
+                        d.getWaitingArea(),
+                        d.getMeetingRoom(),
+                        d.getArchive(),
+                        d.getLibrary(),
+                        d.getServerRoom(),
+                        d.getAccessControl(),
+                        d.getFiberInternet(),
+                        d.getSoundproof()
                 ),
-                null, // industrialDetails
-                null, // serviceDetails
-                null  // landDetails
+                null, null, null
         );
     }
 
@@ -200,27 +237,36 @@ public class ListingMapper {
                 // IndustrialDetailsResponse
                 d == null ? null : new ListingResponse.IndustrialDetailsResponse(
                         d.getSubtype(),
-                        d.getTotalArea(),
-                        d.getCoveredArea(),
+                        d.getNetArea(),
                         d.getBuildingAge(),
+                        d.getRoomCount(),
+                        d.getFloorCount(),
                         d.getCeilingHeight(),
-                        d.getPowerCapacity(),
-                        d.getCrane(),
-                        d.getCraneCapacity(),
-                        d.getLoadingDock(),
-                        d.getLoadingDockCount(),
-                        d.getTruckAccess(),
+                        d.getSiteFee(),
+                        d.getDeposit(),
+                        d.getThreephaseElectricity(),
+                        d.getNaturalGasLine(),
+                        d.getSteamLine(),
+                        d.getWaterSystem(),
+                        d.getWasteWaterSystem(),
+                        d.getCraneSystem(),
+                        d.getVentilationSystem(),
+                        d.getAirConditioning(),
+                        d.getWideOpenArea(),
+                        d.getMachineMountingSuitable(),
+                        d.getLoadingRamp(),
+                        d.getTruckEntrance(),
+                        d.getForkliftTraffic(),
+                        d.getRackingSystem(),
                         d.getColdStorage(),
-                        d.getTemperatureRange(),
-                        d.getProductionLineCount(),
-                        d.getLaboratory(),
-                        d.getOfficeArea(),
-                        d.getFireSystem(),
+                        d.getFireExtinguishingSystem(),
+                        d.getSecurityCameras(),
+                        d.getAlarmSystem(),
+                        d.getFencedArea(),
                         d.getSecurity(),
                         d.getOperatingCost()
                 ),
-                null, // serviceDetails
-                null  // landDetails
+                null, null
         );
     }
 
@@ -253,26 +299,24 @@ public class ListingMapper {
                 // ServiceDetailsResponse
                 d == null ? null : new ListingResponse.ServiceDetailsResponse(
                         d.getSubtype(),
-                        d.getTotalArea(),
-                        d.getCoveredArea(),
-                        d.getVehicleCapacity(),
-                        d.getCoverType(),
-                        d.getHeightLimit(),
-                        d.getValetService(),
-                        d.getEquipmentIncluded(),
-                        d.getChangingRoomCount(),
-                        d.getShowerCount(),
-                        d.getSauna(),
-                        d.getWashBayCount(),
-                        d.getAutomaticSystem(),
-                        d.getLiftCount(),
-                        d.getLiftCapacity(),
-                        d.getPaintBooth(),
-                        d.getPumpCount(),
-                        d.getFuelTypes(),
-                        d.getConvenienceStore(),
+                        d.getArea(),
+                        d.getCapacity(),
+                        d.getSpaceType(),
+                        d.getDeposit(),
                         d.getSecurity(),
                         d.getLighting(),
+                        d.getCctv(),
+                        d.getInternet(),
+                        d.getReception(),
+                        d.getRestRoom(),
+                        d.getKitchen(),
+                        d.getWashingArea(),
+                        d.getMaintenanceArea(),
+                        d.getAirConditioning(),
+                        d.getVentilationSystem(),
+                        d.getStorage(),
+                        d.getOfficeArea(),
+                        d.getCustomerParking(),
                         d.getOperatingCost()
                 ),
                 null  // landDetails
@@ -309,12 +353,34 @@ public class ListingMapper {
                 // LandDetailsResponse
                 d == null ? null : new ListingResponse.LandDetailsResponse(
                         d.getSubtype(),
-                        d.getTotalArea(),
+                        d.getLandArea(),
                         d.getZoningStatus(),
+                        d.getAdaNo(),
+                        d.getParcelNo(),
+                        d.getPaftaNo(),
+                        d.getKaks(),
+                        d.getGabari(),
+                        d.getTapuStatus(),
                         d.getElectricity(),
                         d.getWater(),
+                        d.getNaturalGas(),
+                        d.getSewerage(),
                         d.getRoadAccess(),
-                        d.getTitleDeedStatus()
+                        d.getCornerLot(),
+                        d.getSeaView(),
+                        d.getCityView(),
+                        d.getForestView(),
+                        d.getMountainView(),
+                        d.getFlat(),
+                        d.getSlope(),
+                        d.getFenced(),
+                        d.getAgricultural(),
+                        d.getBuildingPermit(),
+                        d.getVineyard(),
+                        d.getOrchard(),
+                        d.getOliveTrees(),
+                        d.getGreenhouse(),
+                        d.getWell()
                 )
         );
     }

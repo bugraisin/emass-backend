@@ -1,6 +1,6 @@
 package com.emass.emass_backend.model.dto.listing.details.search;
 
-import com.emass.emass_backend.model.entity.enums.HeatingType;
+import com.emass.emass_backend.model.entity.enums.details.HeatingType;
 import com.emass.emass_backend.model.entity.enums.HousingSubtype;
 import com.emass.emass_backend.model.entity.enums.ListingStatus;
 

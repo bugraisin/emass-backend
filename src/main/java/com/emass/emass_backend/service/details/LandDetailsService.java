@@ -48,12 +48,34 @@ public class LandDetailsService {
                 null,
                 new ListingResponse.LandDetailsResponse(
                         details.getSubtype(),
-                        details.getTotalArea(),
+                        details.getLandArea(),
                         details.getZoningStatus(),
+                        details.getAdaNo(),
+                        details.getParcelNo(),
+                        details.getPaftaNo(),
+                        details.getKaks(),
+                        details.getGabari(),
+                        details.getTapuStatus(),
                         details.getElectricity(),
                         details.getWater(),
+                        details.getNaturalGas(),
+                        details.getSewerage(),
                         details.getRoadAccess(),
-                        details.getTitleDeedStatus()
+                        details.getCornerLot(),
+                        details.getSeaView(),
+                        details.getCityView(),
+                        details.getForestView(),
+                        details.getMountainView(),
+                        details.getFlat(),
+                        details.getSlope(),
+                        details.getFenced(),
+                        details.getAgricultural(),
+                        details.getBuildingPermit(),
+                        details.getVineyard(),
+                        details.getOrchard(),
+                        details.getOliveTrees(),
+                        details.getGreenhouse(),
+                        details.getWell()
                 )
         )).toList();
     }

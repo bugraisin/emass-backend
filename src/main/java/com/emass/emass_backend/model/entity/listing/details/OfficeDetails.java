@@ -2,6 +2,8 @@ package com.emass.emass_backend.model.entity.listing.details;
 
 import com.emass.emass_backend.model.entity.listing.Listing;
 import com.emass.emass_backend.model.entity.enums.OfficeSubtype;
+import com.emass.emass_backend.model.entity.enums.details.HeatingType;
+import com.emass.emass_backend.model.entity.enums.details.BuildingType;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,8 +14,7 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
+@AllArgsConstructor@Builder
 public class OfficeDetails {
 
     @Id
@@ -32,54 +33,87 @@ public class OfficeDetails {
     @Column(name = "net_area")
     private Integer netArea;
 
-    @Column(name = "floor_no")
-    private Integer floorNo;
+    @Column(name = "building_age", length = 10)
+    private String buildingAge;
 
-    @Column(name = "building_age")
-    private Integer buildingAge;
-
-    // Oda yapısı
     @Column(name = "room_count")
     private Integer roomCount;
 
-    @Column(name = "meeting_room_count")
-    private Integer meetingRoomCount;
+    @Column(name = "floor_no")
+    private Integer floorNo;
 
-    // Özellikler
+    @Column(name = "floor_count")
+    private Integer floorCount;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "heating_type")
+    private HeatingType heatingType;
+
+    @Column(name = "site_fee")
+    private BigDecimal siteFee;
+
+    @Column(name = "deposit")
+    private BigDecimal deposit;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "building_type")
+    private BuildingType buildingType;
+
+    // Temel Özellikler
     @Column(name = "furnished")
     private Boolean furnished;
-
-    @Column(name = "air_conditioning")
-    private Boolean airConditioning;
 
     @Column(name = "parking")
     private Boolean parking;
 
-    // İş merkezi özellikleri
-    @Column(name = "business_center", length = 100)
-    private String businessCenter;
+    @Column(name = "elevator")
+    private Boolean elevator;
 
+    @Column(name = "security")
+    private Boolean security;
+
+    @Column(name = "generator")
+    private Boolean generator;
+
+    // Ofis Konfor
+    @Column(name = "air_conditioning")
+    private Boolean airConditioning;
+
+    @Column(name = "internet")
+    private Boolean internet;
+
+    @Column(name = "kitchen")
+    private Boolean kitchen;
+
+    @Column(name = "fire_system")
+    private Boolean fireSystem;
+
+    // Çalışma Alanları
     @Column(name = "reception")
     private Boolean reception;
 
-    // Coworking özellikleri
-    @Column(name = "desk_count")
-    private Integer deskCount;
+    @Column(name = "waiting_area")
+    private Boolean waitingArea;
 
-    @Column(name = "private_office_count")
-    private Integer privateOfficeCount;
+    @Column(name = "meeting_room")
+    private Boolean meetingRoom;
 
-    // Call center özellikleri
-    @Column(name = "workstation_count")
-    private Integer workstationCount;
+    @Column(name = "archive")
+    private Boolean archive;
 
-    @Column(name = "sound_isolation")
-    private Boolean soundIsolation;
+    @Column(name = "library")
+    private Boolean library;
 
-    // Maliyet
-    @Column(name = "maintenance_fee")
-    private BigDecimal maintenanceFee;
+    // Teknik Altyapı
+    @Column(name = "server_room")
+    private Boolean serverRoom;
 
-    @Column(name = "internet_included")
-    private Boolean internetIncluded;
+    @Column(name = "access_control")
+    private Boolean accessControl;
+
+    @Column(name = "fiber_internet")
+    private Boolean fiberInternet;
+
+    @Column(name = "soundproof")
+    private Boolean soundproof;
 }

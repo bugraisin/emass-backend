@@ -1,24 +1,36 @@
 package com.emass.emass_backend.model.dto.listing.details;
 
 import com.emass.emass_backend.model.entity.enums.CommercialSubtype;
+import com.emass.emass_backend.model.entity.enums.details.HeatingType;
+import com.emass.emass_backend.model.entity.enums.details.BuildingType;
 
 import java.math.BigDecimal;
 
 public record CommercialDetailsRequest(
         CommercialSubtype subtype,
         Integer netArea,
+        String buildingAge,
+        Integer roomCount,
         Integer floorNo,
-        Integer buildingAge,
+        Integer floorCount,
+        HeatingType heatingType,
+        BigDecimal siteFee,
+        BigDecimal deposit,
+        BuildingType buildingType,
         Boolean furnished,
-        Boolean airConditioning,
         Boolean parking,
-        Boolean showcase,
-        Integer streetFrontage,
+        Boolean security,
+        Boolean elevator,
+        Boolean generator,
+        Boolean airConditioning,
+        Boolean internet,
         Boolean kitchen,
-        Integer seatingCapacity,
+        Boolean toilet,
+        Boolean showcase,
+        Boolean warehouse,
+        Boolean loadingDock,
+        Boolean cashRegister,
         Boolean outdoorSeating,
-        Boolean liquorLicense,
-        Integer treatmentRoomCount,
         Boolean waitingArea,
-        BigDecimal maintenanceFee
+        Boolean changingRoom
 ) {}
