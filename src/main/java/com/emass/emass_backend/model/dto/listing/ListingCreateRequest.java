@@ -16,7 +16,6 @@ public record ListingCreateRequest(
         String city,
         String district,
         String neighborhood,
-        String addressText,
         Double latitude,
         Double longitude,
 

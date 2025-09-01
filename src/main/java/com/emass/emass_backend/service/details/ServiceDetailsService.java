@@ -35,7 +35,6 @@ public class ServiceDetailsService {
                 details.getListing().getCity(),
                 details.getListing().getDistrict(),
                 details.getListing().getNeighborhood(),
-                details.getListing().getAddressText(),
                 details.getListing().getLatitude(),
                 details.getListing().getLongitude(),
                 details.getListing().getCreatedAt(),

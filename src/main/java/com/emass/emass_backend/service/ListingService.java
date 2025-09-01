@@ -22,7 +22,6 @@ public class ListingService {
     private final UserRepository userRepository;
     private final ListingRepository listingRepository;
 
-    // YENİ: Tüm kategori repository'leri
     private final HousingDetailsRepository housingDetailsRepository;
     private final CommercialDetailsRepository commercialDetailsRepository;
     private final OfficeDetailsRepository officeDetailsRepository;

@@ -22,7 +22,6 @@ public record ListingResponse(
         String city,
         String district,
         String neighborhood,
-        String addressText,
         Double latitude,
         Double longitude,
         LocalDateTime createdAt,

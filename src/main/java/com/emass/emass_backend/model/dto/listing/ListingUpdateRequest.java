@@ -16,7 +16,6 @@ public record ListingUpdateRequest(
         @Size(max = 100) String city,
         @Size(max = 100) String district,
         @Size(max = 120) String neighborhood,
-        @Size(max = 255) String addressText,
         Double latitude,
         Double longitude,
 

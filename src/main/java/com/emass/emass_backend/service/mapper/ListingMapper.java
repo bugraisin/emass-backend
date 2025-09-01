@@ -21,7 +21,6 @@ public class ListingMapper {
         listing.setCity(req.city());
         listing.setDistrict(req.district());
         listing.setNeighborhood(req.neighborhood());
-        listing.setAddressText(req.addressText());
         listing.setLatitude(req.latitude());
         listing.setLongitude(req.longitude());
         return listing;
@@ -43,7 +42,6 @@ public class ListingMapper {
                 l.getCity(),
                 l.getDistrict(),
                 l.getNeighborhood(),
-                l.getAddressText(),
                 l.getLatitude(),
                 l.getLongitude(),
                 l.getCreatedAt(),
@@ -110,7 +108,6 @@ public class ListingMapper {
                 l.getCity(),
                 l.getDistrict(),
                 l.getNeighborhood(),
-                l.getAddressText(),
                 l.getLatitude(),
                 l.getLongitude(),
                 l.getCreatedAt(),
@@ -166,7 +163,6 @@ public class ListingMapper {
                 l.getCity(),
                 l.getDistrict(),
                 l.getNeighborhood(),
-                l.getAddressText(),
                 l.getLatitude(),
                 l.getLongitude(),
                 l.getCreatedAt(),
@@ -225,7 +221,6 @@ public class ListingMapper {
                 l.getCity(),
                 l.getDistrict(),
                 l.getNeighborhood(),
-                l.getAddressText(),
                 l.getLatitude(),
                 l.getLongitude(),
                 l.getCreatedAt(),
@@ -286,7 +281,6 @@ public class ListingMapper {
                 l.getCity(),
                 l.getDistrict(),
                 l.getNeighborhood(),
-                l.getAddressText(),
                 l.getLatitude(),
                 l.getLongitude(),
                 l.getCreatedAt(),
@@ -339,7 +333,6 @@ public class ListingMapper {
                 l.getCity(),
                 l.getDistrict(),
                 l.getNeighborhood(),
-                l.getAddressText(),
                 l.getLatitude(),
                 l.getLongitude(),
                 l.getCreatedAt(),
