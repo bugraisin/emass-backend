@@ -45,7 +45,5 @@ public record ServiceSearchRequest(
         String fuelTypes,
         Boolean convenienceStore,
         Boolean security,
-        Boolean lighting,
-        BigDecimal minOperatingCost,
-        BigDecimal maxOperatingCost
+        Boolean lighting
 ) {}

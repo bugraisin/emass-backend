@@ -33,11 +33,11 @@ public class CommercialDetails {
     @Column(name = "net_area")
     private Integer netArea;
 
-    @Column(name = "building_age", length = 10)
-    private String buildingAge;
+    @Column(name = "gross_area")
+    private Integer grossArea;
 
-    @Column(name = "room_count")
-    private Integer roomCount;
+    @Column(name = "building_age")
+    private String buildingAge;
 
     @Column(name = "floor_no")
     private Integer floorNo;

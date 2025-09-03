@@ -72,10 +72,6 @@ public class IndustrialSpecifications {
                 predicates.add(cb.equal(root.get("fireSystem"), request.fireSystem()));
             if(request.security() != null)
                 predicates.add(cb.equal(root.get("security"), request.security()));
-            if(request.minOperatingCost() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("operatingCost"), request.minOperatingCost()));
-            if(request.maxOperatingCost() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("operatingCost"), request.maxOperatingCost()));
 
             // 2. Listing alanları (join ile)
             Join<IndustrialDetails, Listing> listingJoin = root.join("listing", JoinType.INNER);

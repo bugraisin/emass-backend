@@ -4,6 +4,7 @@ import com.emass.emass_backend.model.entity.User;
 import com.emass.emass_backend.model.entity.enums.ListingStatus;
 import com.emass.emass_backend.model.entity.enums.ListingType;
 import com.emass.emass_backend.model.entity.enums.PropertyType;
+import com.emass.emass_backend.model.entity.listing.details.*;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -65,4 +66,22 @@ public class Listing {
 
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
+
+    @OneToOne(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private HousingDetails housingDetails;
+
+    @OneToOne(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private CommercialDetails commercialDetails;
+
+    @OneToOne(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private OfficeDetails officeDetails;
+
+    @OneToOne(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private IndustrialDetails industrialDetails;
+
+    @OneToOne(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private ServiceDetails serviceDetails;
+
+    @OneToOne(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private LandDetails landDetails;
 }

@@ -145,4 +145,8 @@ public class ListingService {
             };
         }).toList();
     }
+
+    public void deleteListing(Long id) {
+        listingRepository.deleteById(id);
+    }
 }

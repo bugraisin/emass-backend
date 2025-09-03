@@ -6,7 +6,8 @@ import java.math.BigDecimal;
 
 public record ServiceDetailsRequest(
         ServiceSubtype subtype,
-        Integer area,
+        Integer grossArea,
+        Integer netArea,
         Integer capacity,
         String spaceType,
         BigDecimal deposit,
@@ -23,7 +24,6 @@ public record ServiceDetailsRequest(
         Boolean ventilationSystem,
         Boolean storage,
         Boolean officeArea,
-        Boolean customerParking,
-        BigDecimal operatingCost
+        Boolean customerParking
 ) {}
 

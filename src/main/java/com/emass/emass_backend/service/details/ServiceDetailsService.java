@@ -46,7 +46,8 @@ public class ServiceDetailsService {
                 null,
                 new ListingResponse.ServiceDetailsResponse(
                         details.getSubtype(),
-                        details.getArea(),
+                        details.getGrossArea(),
+                        details.getNetArea(),
                         details.getCapacity(),
                         details.getSpaceType(),
                         details.getDeposit(),
@@ -63,8 +64,7 @@ public class ServiceDetailsService {
                         details.getVentilationSystem(),
                         details.getStorage(),
                         details.getOfficeArea(),
-                        details.getCustomerParking(),
-                        details.getOperatingCost()
+                        details.getCustomerParking()
                 ),
                 null
         )).toList();

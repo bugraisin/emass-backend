@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+import static com.emass.emass_backend.config.RestApis.*;
+
 @RestController
-@RequestMapping("/api/listings")
+@RequestMapping(LISTINGS_BASE)
 @RequiredArgsConstructor
 @CrossOrigin("*")
 public class ListingController {
@@ -26,58 +28,63 @@ public class ListingController {
     private final ServiceDetailsService serviceDetailsService;
     private final LandDetailsService landDetailsService;
 
-    @PostMapping("/create")
+    @PostMapping(CREATE_LISTING)
     @ResponseStatus(HttpStatus.CREATED)
     public ListingResponse create(@Valid @RequestBody ListingCreateRequest request) {
         return listingService.create(request);
     }
 
-    @GetMapping("/search/house")
+    @GetMapping(SEARCH_HOUSE)
     @ResponseStatus(HttpStatus.OK)
     public List<ListingResponse> search(@Valid @ModelAttribute HouseSearchRequest request) {
         return housingDetailsService.search(request);
     }
 
-    @GetMapping("/search/office")
+    @GetMapping(SEARCH_OFFICE)
     @ResponseStatus(HttpStatus.OK)
     public List<ListingResponse> search(@Valid @ModelAttribute OfficeSearchRequest request) {
         return officeDetailsService.search(request);
     }
 
-    @GetMapping("/search/commercial")
+    @GetMapping(SEARCH_COMMERCIAL)
     @ResponseStatus(HttpStatus.OK)
     public List<ListingResponse> search(@Valid @ModelAttribute CommercialSearchRequest request) {
         return commercialDetailsService.search(request);
     }
 
-    @GetMapping("/search/industrial")
+    @GetMapping(SEARCH_INDUSTRIAL)
     @ResponseStatus(HttpStatus.OK)
     public List<ListingResponse> search(@Valid @ModelAttribute IndustrialSearchRequest request) {
         return industrialDetailsService.search(request);
     }
 
-    @GetMapping("/search/service")
+    @GetMapping(SEARCH_SERVICE)
     @ResponseStatus(HttpStatus.OK)
     public List<ListingResponse> search(@Valid @ModelAttribute ServiceSearchRequest request) {
         return serviceDetailsService.search(request);
     }
 
-    @GetMapping("/search/land")
+    @GetMapping(SEARCH_LAND)
     @ResponseStatus(HttpStatus.OK)
     public List<ListingResponse> search(@Valid @ModelAttribute LandSearchRequest request) {
         return landDetailsService.search(request);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(GET_LISTING_BY_ID)
     @ResponseStatus(HttpStatus.OK)
     public ListingResponse getById(@PathVariable Long id) {
         return listingService.getById(id);
     }
 
-    @GetMapping
+    @GetMapping(GET_ALL_LISTINGS)
     @ResponseStatus(HttpStatus.OK)
     public List<ListingResponse> getAll() {
         return listingService.getAll();
     }
 
+    @DeleteMapping(DELETE_LISTING_BY_ID)
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteListing(@PathVariable Long id) {
+        listingService.deleteListing(id);
+    }
 }

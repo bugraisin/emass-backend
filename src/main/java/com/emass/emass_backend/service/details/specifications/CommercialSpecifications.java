@@ -52,10 +52,6 @@ public class CommercialSpecifications {
                 predicates.add(cb.equal(root.get("outdoorSeating"), request.outdoorSeating()));
             if(request.liquorLicense() != null)
                 predicates.add(cb.equal(root.get("liquorLicense"), request.liquorLicense()));
-            if(request.minTreatmentRoomCount() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("treatmentRoomCount"), request.minTreatmentRoomCount()));
-            if(request.maxTreatmentRoomCount() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("treatmentRoomCount"), request.maxTreatmentRoomCount()));
             if(request.waitingArea() != null)
                 predicates.add(cb.equal(root.get("waitingArea"), request.waitingArea()));
             if(request.minMaintenanceFee() != null)

@@ -31,7 +31,7 @@ public class LandDetails {
     @Column(name = "land_area")
     private Integer landArea;
 
-    @Column(name = "zoning_status", length = 30)
+    @Column(name = "zoning_status")
     private String zoningStatus;
 
     @Column(name = "ada_no")
@@ -40,7 +40,7 @@ public class LandDetails {
     @Column(name = "parcel_no")
     private Integer parcelNo;
 
-    @Column(name = "pafta_no", length = 50)
+    @Column(name = "pafta_no")
     private String paftaNo;
 
     @Column(name = "kaks")
@@ -49,7 +49,7 @@ public class LandDetails {
     @Column(name = "gabari")
     private BigDecimal gabari;
 
-    @Column(name = "tapu_status", length = 30)
+    @Column(name = "tapu_status")
     private String tapuStatus;
 
     // Altyapı

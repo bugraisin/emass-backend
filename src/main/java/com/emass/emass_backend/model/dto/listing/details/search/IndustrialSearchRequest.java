@@ -41,7 +41,5 @@ public record IndustrialSearchRequest(
         Integer minOfficeArea,
         Integer maxOfficeArea,
         Boolean fireSystem,
-        Boolean security,
-        BigDecimal minOperatingCost,
-        BigDecimal maxOperatingCost
+        Boolean security
 ) {}

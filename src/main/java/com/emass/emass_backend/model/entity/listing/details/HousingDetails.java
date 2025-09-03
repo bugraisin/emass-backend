@@ -33,7 +33,7 @@ public class HousingDetails {
     private HousingSubtype subtype;
 
     // Temel bilgiler
-    @Column(name = "room_count", length = 10)
+    @Column(name = "room_count")
     private String roomCount;
 
     @Column(name = "gross_area")
@@ -48,7 +48,7 @@ public class HousingDetails {
     @Column(name = "total_floors")
     private Integer totalFloors;
 
-    @Column(name = "building_age", length = 10)
+    @Column(name = "building_age")
     private String buildingAge;
 
     // Sayısal özellikler
@@ -73,7 +73,7 @@ public class HousingDetails {
     private UsageStatus usageStatus;
 
     // Site bilgileri
-    @Column(name = "site_name", length = 100)
+    @Column(name = "site_name")
     private String siteName;
 
     @Column(name = "site_fee")

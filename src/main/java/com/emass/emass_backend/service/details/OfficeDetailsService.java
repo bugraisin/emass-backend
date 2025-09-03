@@ -44,6 +44,7 @@ public class OfficeDetailsService {
                 null,
                 new ListingResponse.OfficeDetailsResponse(
                         details.getSubtype(),
+                        details.getGrossArea(),
                         details.getNetArea(),
                         details.getBuildingAge(),
                         details.getRoomCount(),

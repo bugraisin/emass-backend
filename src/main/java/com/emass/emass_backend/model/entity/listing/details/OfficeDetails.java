@@ -29,11 +29,13 @@ public class OfficeDetails {
     @Column(name = "subtype")
     private OfficeSubtype subtype;
 
-    // Temel bilgiler
     @Column(name = "net_area")
     private Integer netArea;
 
-    @Column(name = "building_age", length = 10)
+    @Column(name = "gross_area")
+    private Integer grossArea;
+
+    @Column(name = "building_age")
     private String buildingAge;
 
     @Column(name = "room_count")

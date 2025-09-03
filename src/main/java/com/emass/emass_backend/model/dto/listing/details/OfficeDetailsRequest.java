@@ -8,6 +8,7 @@ import java.math.BigDecimal;
 
 public record OfficeDetailsRequest(
         OfficeSubtype subtype,
+        Integer grossArea,
         Integer netArea,
         String buildingAge,
         Integer roomCount,

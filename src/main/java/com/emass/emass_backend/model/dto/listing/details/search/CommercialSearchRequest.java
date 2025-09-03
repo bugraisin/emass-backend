@@ -32,8 +32,6 @@ public record CommercialSearchRequest(
         Integer maxSeatingCapacity,
         Boolean outdoorSeating,
         Boolean liquorLicense,
-        Integer minTreatmentRoomCount,
-        Integer maxTreatmentRoomCount,
         Boolean waitingArea,
         BigDecimal minMaintenanceFee,
         BigDecimal maxMaintenanceFee

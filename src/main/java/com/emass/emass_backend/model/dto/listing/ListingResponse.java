@@ -79,9 +79,9 @@ public record ListingResponse(
 
     public record CommercialDetailsResponse(
             CommercialSubtype subtype,
+            Integer grossArea,
             Integer netArea,
             String buildingAge,
-            Integer roomCount,
             Integer floorNo,
             Integer floorCount,
             HeatingType heatingType,
@@ -108,6 +108,7 @@ public record ListingResponse(
 
     public record OfficeDetailsResponse(
             OfficeSubtype subtype,
+            Integer grossArea,
             Integer netArea,
             String buildingAge,
             Integer roomCount,
@@ -139,6 +140,7 @@ public record ListingResponse(
 
     public record IndustrialDetailsResponse(
             IndustrialSubtype subtype,
+            Integer grossArea,
             Integer netArea,
             String buildingAge,
             Integer roomCount,
@@ -165,13 +167,13 @@ public record ListingResponse(
             Boolean securityCameras,
             Boolean alarmSystem,
             Boolean fencedArea,
-            Boolean security,
-            BigDecimal operatingCost
+            Boolean security
     ) {}
 
     public record ServiceDetailsResponse(
             ServiceSubtype subtype,
-            Integer area,
+            Integer grossArea,
+            Integer netArea,
             Integer capacity,
             String spaceType,
             BigDecimal deposit,
@@ -188,8 +190,7 @@ public record ListingResponse(
             Boolean ventilationSystem,
             Boolean storage,
             Boolean officeArea,
-            Boolean customerParking,
-            BigDecimal operatingCost
+            Boolean customerParking
     ) {}
 
     public record LandDetailsResponse(

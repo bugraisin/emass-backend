@@ -45,6 +45,7 @@ public class IndustrialDetailsService {
                 null,
                 new ListingResponse.IndustrialDetailsResponse(
                         details.getSubtype(),
+                        details.getGrossArea(),
                         details.getNetArea(),
                         details.getBuildingAge(),
                         details.getRoomCount(),
@@ -71,8 +72,7 @@ public class IndustrialDetailsService {
                         details.getSecurityCameras(),
                         details.getAlarmSystem(),
                         details.getFencedArea(),
-                        details.getSecurity(),
-                        details.getOperatingCost()
+                        details.getSecurity()
                 ),
                 null, null
         )).toList();

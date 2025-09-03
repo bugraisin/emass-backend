@@ -27,18 +27,20 @@ public class ServiceDetails {
     @Column(name = "subtype")
     private ServiceSubtype subtype;
 
-    // Temel bilgiler
-    @Column(name = "area")
-    private Integer area; // Alan (m²)
+    @Column(name = "net_area")
+    private Integer netArea;
+
+    @Column(name = "gross_area")
+    private Integer grossArea;
 
     @Column(name = "capacity")
-    private Integer capacity; // Kapasite/Araç Sayısı
+    private Integer capacity;
 
-    @Column(name = "space_type", length = 30)
-    private String spaceType; // KAPALI, ACIK, YARI_KAPALI, KARISIK
+    @Column(name = "space_type")
+    private String spaceType;
 
     @Column(name = "deposit")
-    private BigDecimal deposit; // Depozito
+    private BigDecimal deposit;
 
     // Temel Altyapı
     @Column(name = "security")
@@ -86,7 +88,4 @@ public class ServiceDetails {
     @Column(name = "customer_parking")
     private Boolean customerParking;
 
-    // Maliyet
-    @Column(name = "operating_cost")
-    private BigDecimal operatingCost;
 }

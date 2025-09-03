@@ -117,9 +117,9 @@ public class ListingMapper {
                 // CommercialDetailsResponse
                 d == null ? null : new ListingResponse.CommercialDetailsResponse(
                         d.getSubtype(),
+                        d.getGrossArea(),
                         d.getNetArea(),
                         d.getBuildingAge(),
-                        d.getRoomCount(),
                         d.getFloorNo(),
                         d.getFloorCount(),
                         d.getHeatingType(),
@@ -173,6 +173,7 @@ public class ListingMapper {
                 // OfficeDetailsResponse
                 d == null ? null : new ListingResponse.OfficeDetailsResponse(
                         d.getSubtype(),
+                        d.getGrossArea(),
                         d.getNetArea(),
                         d.getBuildingAge(),
                         d.getRoomCount(),
@@ -232,6 +233,7 @@ public class ListingMapper {
                 // IndustrialDetailsResponse
                 d == null ? null : new ListingResponse.IndustrialDetailsResponse(
                         d.getSubtype(),
+                        d.getGrossArea(),
                         d.getNetArea(),
                         d.getBuildingAge(),
                         d.getRoomCount(),
@@ -258,8 +260,7 @@ public class ListingMapper {
                         d.getSecurityCameras(),
                         d.getAlarmSystem(),
                         d.getFencedArea(),
-                        d.getSecurity(),
-                        d.getOperatingCost()
+                        d.getSecurity()
                 ),
                 null, null
         );
@@ -293,7 +294,8 @@ public class ListingMapper {
                 // ServiceDetailsResponse
                 d == null ? null : new ListingResponse.ServiceDetailsResponse(
                         d.getSubtype(),
-                        d.getArea(),
+                        d.getGrossArea(),
+                        d.getNetArea(),
                         d.getCapacity(),
                         d.getSpaceType(),
                         d.getDeposit(),
@@ -310,8 +312,7 @@ public class ListingMapper {
                         d.getVentilationSystem(),
                         d.getStorage(),
                         d.getOfficeArea(),
-                        d.getCustomerParking(),
-                        d.getOperatingCost()
+                        d.getCustomerParking()
                 ),
                 null  // landDetails
         );

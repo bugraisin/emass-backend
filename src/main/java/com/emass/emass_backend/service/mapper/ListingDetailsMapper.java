@@ -59,9 +59,9 @@ public class ListingDetailsMapper {
         return CommercialDetails.builder()
                 .listing(listing)
                 .subtype(req.subtype())
+                .grossArea(req.grossArea())
                 .netArea(req.netArea())
                 .buildingAge(req.buildingAge())
-                .roomCount(req.roomCount())
                 .floorNo(req.floorNo())
                 .floorCount(req.floorCount())
                 .heatingType(req.heatingType())
@@ -93,6 +93,7 @@ public class ListingDetailsMapper {
         return OfficeDetails.builder()
                 .listing(listing)
                 .subtype(req.subtype())
+                .grossArea(req.grossArea())
                 .netArea(req.netArea())
                 .buildingAge(req.buildingAge())
                 .roomCount(req.roomCount())
@@ -129,6 +130,7 @@ public class ListingDetailsMapper {
         return IndustrialDetails.builder()
                 .listing(listing)
                 .subtype(req.subtype())
+                .grossArea(req.grossArea())
                 .netArea(req.netArea())
                 .buildingAge(req.buildingAge())
                 .roomCount(req.roomCount())
@@ -156,7 +158,6 @@ public class ListingDetailsMapper {
                 .alarmSystem(req.alarmSystem())
                 .fencedArea(req.fencedArea())
                 .security(req.security())
-                .operatingCost(req.operatingCost())
                 .build();
     }
 
@@ -166,7 +167,8 @@ public class ListingDetailsMapper {
         return ServiceDetails.builder()
                 .listing(listing)
                 .subtype(req.subtype())
-                .area(req.area())
+                .grossArea(req.grossArea())
+                .netArea(req.netArea())
                 .capacity(req.capacity())
                 .spaceType(req.spaceType())
                 .deposit(req.deposit())
@@ -184,7 +186,6 @@ public class ListingDetailsMapper {
                 .storage(req.storage())
                 .officeArea(req.officeArea())
                 .customerParking(req.customerParking())
-                .operatingCost(req.operatingCost())
                 .build();
     }
 

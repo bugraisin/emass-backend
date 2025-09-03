@@ -30,10 +30,6 @@ public class OfficeSpecifications {
                 predicates.add(cb.greaterThanOrEqualTo(root.get("buildingAge"), request.minBuildingAge()));
             if(request.maxBuildingAge() != null)
                 predicates.add(cb.lessThanOrEqualTo(root.get("buildingAge"), request.maxBuildingAge()));
-            if(request.minRoomCount() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("roomCount"), request.minRoomCount()));
-            if(request.maxRoomCount() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("roomCount"), request.maxRoomCount()));
             if(request.minMeetingRoomCount() != null)
                 predicates.add(cb.greaterThanOrEqualTo(root.get("meetingRoomCount"), request.minMeetingRoomCount()));
             if(request.maxMeetingRoomCount() != null)

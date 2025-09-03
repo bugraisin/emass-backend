@@ -31,6 +31,9 @@ public class IndustrialDetails {
     @Column(name = "net_area")
     private Integer netArea;
 
+    @Column(name = "gross_area")
+    private Integer grossArea;
+
     @Column(name = "building_age", length = 30)
     private String buildingAge;
 
@@ -112,8 +115,4 @@ public class IndustrialDetails {
 
     @Column(name = "security")
     private Boolean security;
-
-    // Maliyet
-    @Column(name = "operating_cost")
-    private BigDecimal operatingCost;
 }

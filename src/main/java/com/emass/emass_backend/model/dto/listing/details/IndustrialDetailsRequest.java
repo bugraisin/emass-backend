@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 
 public record IndustrialDetailsRequest(
         IndustrialSubtype subtype,
+        Integer grossArea,
         Integer netArea,
         String buildingAge,
         Integer roomCount,
@@ -32,6 +33,5 @@ public record IndustrialDetailsRequest(
         Boolean securityCameras,
         Boolean alarmSystem,
         Boolean fencedArea,
-        Boolean security,
-        BigDecimal operatingCost
+        Boolean security
 ) {}

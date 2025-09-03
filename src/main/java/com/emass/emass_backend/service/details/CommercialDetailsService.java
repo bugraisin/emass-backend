@@ -43,9 +43,9 @@ public class CommercialDetailsService {
                 null,
                 new ListingResponse.CommercialDetailsResponse(
                         details.getSubtype(),
+                        details.getGrossArea(),
                         details.getNetArea(),
                         details.getBuildingAge(),
-                        details.getRoomCount(),
                         details.getFloorNo(),
                         details.getFloorCount(),
                         details.getHeatingType(),
