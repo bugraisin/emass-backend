@@ -1,5 +1,6 @@
 package com.emass.emass_backend.model.dto.listing.details.search;
 
+import com.emass.emass_backend.model.entity.enums.details.FacadeDirection;
 import com.emass.emass_backend.model.entity.enums.details.HeatingType;
 import com.emass.emass_backend.model.entity.enums.HousingSubtype;
 import com.emass.emass_backend.model.entity.enums.ListingStatus;
@@ -10,8 +11,8 @@ import java.util.List;
 public record HouseSearchRequest(
         // Listing filtreleri (Address bileşeninden)
         String city,
-        String district,
-        String neighborhood,
+        List<String> district,
+        List<String> neighborhood,
 
         // Price filtreleri (Price bileşeninden)
         BigDecimal minPrice,
@@ -45,7 +46,7 @@ public record HouseSearchRequest(
         List<String> heatingTypes,  // ["DOGALGAZ", "KOMBI", "KALORIFER", "KLIMA", "SOBALI", "YOK"]
 
         // Cephe yönü (çoklu seçim)
-        List<String> facadeDirections,// ["Kuzey", "Güney", "Doğu", "Batı", "Kuzey-Doğu", "Kuzey-Batı", "Güney-Doğu", "Güney-Batı"]
+        List<FacadeDirection> facadeDirections,// ["Kuzey", "Güney", "Doğu", "Batı", "Kuzey-Doğu", "Kuzey-Batı", "Güney-Doğu", "Güney-Batı"]
 
         // Temel Özellikler (Boolean features)
         Boolean furnished,

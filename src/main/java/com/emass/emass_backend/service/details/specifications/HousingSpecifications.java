@@ -9,7 +9,6 @@ import org.springframework.data.jpa.domain.Specification;
 import jakarta.persistence.criteria.Predicate;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class HousingSpecifications {
 
@@ -17,7 +16,25 @@ public class HousingSpecifications {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            // 1. HousingDetails alanları
+            // 1. Listing alanları (join ile)
+            Join<HousingDetails, Listing> listingJoin = root.join("listing", JoinType.INNER);
+            if(request.city() != null)
+                predicates.add(cb.equal(listingJoin.get("city"), request.city()));
+
+            if(request.district() != null && !request.district().isEmpty())
+                predicates.add(listingJoin.get("district").in(request.district()));
+
+            if(request.neighborhood() != null && !request.neighborhood().isEmpty())
+                predicates.add(listingJoin.get("neighborhood").in(request.neighborhood()));
+
+            if(request.minPrice() != null)
+                predicates.add(cb.greaterThanOrEqualTo(listingJoin.get("price"), request.minPrice()));
+            if(request.maxPrice() != null)
+                predicates.add(cb.lessThanOrEqualTo(listingJoin.get("price"), request.maxPrice()));
+            if(request.status() != null)
+                predicates.add(cb.equal(listingJoin.get("status"), request.status()));
+
+            // 2. HousingDetails alanları
             if(request.subtype() != null)
                 predicates.add(cb.equal(root.get("subtype"), request.subtype()));
 
@@ -44,7 +61,7 @@ public class HousingSpecifications {
                                 floorPredicates.add(cb.equal(root.get("floorNo"), Integer.parseInt(processedFloor)));
                         case "11-15" -> floorPredicates.add(cb.between(root.get("floorNo"), 11, 15));
                         case "16-20" -> floorPredicates.add(cb.between(root.get("floorNo"), 16, 20));
-                        case "21+", "21" -> floorPredicates.add(cb.greaterThanOrEqualTo(root.get("floorNo"), 21));
+                        case "21+" -> floorPredicates.add(cb.greaterThanOrEqualTo(root.get("floorNo"), 21));
                     }
                 }
                 if(!floorPredicates.isEmpty()) {
@@ -64,7 +81,7 @@ public class HousingSpecifications {
                         case "16-20" -> totalFloorPredicates.add(cb.between(root.get("totalFloors"), 16, 20));
                         case "21-25" -> totalFloorPredicates.add(cb.between(root.get("totalFloors"), 21, 25));
                         case "26-30" -> totalFloorPredicates.add(cb.between(root.get("totalFloors"), 26, 30));
-                        case "31+", "31" -> totalFloorPredicates.add(cb.greaterThanOrEqualTo(root.get("totalFloors"), 31));
+                        case "31+" -> totalFloorPredicates.add(cb.greaterThanOrEqualTo(root.get("totalFloors"), 31));
                     }
                 }
                 if(!totalFloorPredicates.isEmpty()) {
@@ -85,7 +102,7 @@ public class HousingSpecifications {
                         case "16-20" -> buildingAgePredicates.add(cb.equal(root.get("buildingAge"), "16-20"));
                         case "21-25" -> buildingAgePredicates.add(cb.equal(root.get("buildingAge"), "21-25"));
                         case "26-30" -> buildingAgePredicates.add(cb.equal(root.get("buildingAge"), "26-30"));
-                        case "31+", "31" -> buildingAgePredicates.add(cb.equal(root.get("buildingAge"), "31+"));
+                        case "31+" -> buildingAgePredicates.add(cb.equal(root.get("buildingAge"), "31+"));
                     }
                 }
                 if(!buildingAgePredicates.isEmpty()) {
@@ -170,21 +187,6 @@ public class HousingSpecifications {
                 predicates.add(cb.equal(root.get("childrenPlayground"), request.childrenPlayground()));
             if(request.sportsArea() != null)
                 predicates.add(cb.equal(root.get("sportsArea"), request.sportsArea()));
-
-            // 2. Listing alanları (join ile)
-            Join<HousingDetails, Listing> listingJoin = root.join("listing", JoinType.INNER);
-            if(request.city() != null)
-                predicates.add(cb.equal(listingJoin.get("city"), request.city()));
-            if(request.district() != null)
-                predicates.add(cb.equal(listingJoin.get("district"), request.district()));
-            if(request.neighborhood() != null)
-                predicates.add(cb.equal(listingJoin.get("neighborhood"), request.neighborhood()));
-            if(request.minPrice() != null)
-                predicates.add(cb.greaterThanOrEqualTo(listingJoin.get("price"), request.minPrice()));
-            if(request.maxPrice() != null)
-                predicates.add(cb.lessThanOrEqualTo(listingJoin.get("price"), request.maxPrice()));
-            if(request.status() != null)
-                predicates.add(cb.equal(listingJoin.get("status"), request.status()));
 
             // Tüm filtreleri AND ile birleştir
             return cb.and(predicates.toArray(new Predicate[0]));
