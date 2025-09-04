@@ -187,59 +187,63 @@ public class ListingMapper {
 
     /** TİCARİ detayıyla birlikte response üretir. */
     public ListingDetailResponse toResponse(Listing l, CommercialDetails d) {
-//        if (l == null) return null;
-//
-//        return new ListingDetailResponse(
-//                l.getId(),
-//                l.getOwner() != null ? l.getOwner().getId() : null,
-//                l.getTitle(),
-//                l.getDescription(),
-//                l.getListingType(),
-//                l.getPropertyType(),
-//                l.getStatus(),
-//                l.getPrice(),
-//                l.getCity(),
-//                l.getDistrict(),
-//                l.getNeighborhood(),
-//                l.getLatitude(),
-//                l.getLongitude(),
-//                l.getCreatedAt(),
-//                l.getUpdatedAt(),
-//                l.getPhotos(),
-//
-//                null, // housingDetails
-//                // CommercialDetailsResponse
-//                d == null ? null : new ListingDetailResponse.CommercialDetailsResponse(
-//                        d.getSubtype(),
-//                        d.getGrossArea(),
-//                        d.getNetArea(),
-//                        d.getBuildingAge(),
-//                        d.getFloorNo(),
-//                        d.getFloorCount(),
-//                        d.getHeatingType(),
-//                        d.getSiteFee(),
-//                        d.getDeposit(),
-//                        d.getBuildingType(),
-//                        d.getFurnished(),
-//                        d.getParking(),
-//                        d.getSecurity(),
-//                        d.getElevator(),
-//                        d.getGenerator(),
-//                        d.getAirConditioning(),
-//                        d.getInternet(),
-//                        d.getKitchen(),
-//                        d.getToilet(),
-//                        d.getShowcase(),
-//                        d.getWarehouse(),
-//                        d.getLoadingDock(),
-//                        d.getCashRegister(),
-//                        d.getOutdoorSeating(),
-//                        d.getWaitingArea(),
-//                        d.getChangingRoom()
-//                ),
-//                null, null, null, null
-//        );
-        return null;
+        if (l == null) return null;
+
+        return new ListingDetailResponse(
+                l.getId(),
+                l.getOwner() != null ? l.getOwner().getId() : null,
+                l.getTitle(),
+                l.getDescription(),
+                l.getListingType(),
+                l.getPropertyType(),
+                l.getStatus(),
+                l.getPrice(),
+                l.getCity(),
+                l.getDistrict(),
+                l.getNeighborhood(),
+                l.getLatitude(),
+                l.getLongitude(),
+                l.getCreatedAt(),
+                l.getUpdatedAt(),
+                l.getPhotos() != null ? l.getPhotos().stream()
+                        .map(p -> new PhotoResponse(
+                                p.getId(),
+                                p.getFullImageUrl(),
+                                p.getSeqNumber()
+                        ))
+                        .toList() : null,
+
+                null,
+                d == null ? null : new ListingDetailResponse.CommercialDetailsResponse(
+                        d.getSubtype(),
+                        d.getGrossArea(),
+                        d.getNetArea(),
+                        d.getBuildingAge(),
+                        d.getFloorNo(),
+                        d.getFloorCount(),
+                        d.getHeatingType(),
+                        d.getSiteFee(),
+                        d.getDeposit(),
+                        d.getBuildingType(),
+                        d.getFurnished(),
+                        d.getParking(),
+                        d.getSecurity(),
+                        d.getElevator(),
+                        d.getGenerator(),
+                        d.getAirConditioning(),
+                        d.getInternet(),
+                        d.getKitchen(),
+                        d.getToilet(),
+                        d.getShowcase(),
+                        d.getWarehouse(),
+                        d.getLoadingDock(),
+                        d.getCashRegister(),
+                        d.getOutdoorSeating(),
+                        d.getWaitingArea(),
+                        d.getChangingRoom()
+                ),
+                null, null, null, null
+        );
     }
 
     /** ENDÜSTRİYEL detayıyla birlikte response üretir. */

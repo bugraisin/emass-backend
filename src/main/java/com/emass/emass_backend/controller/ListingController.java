@@ -25,7 +25,7 @@ public class ListingController {
     private final PhotoService photoService;
     private final PropertySearchService propertySearchService;
 
-    @PostMapping("/create")
+    @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ListingDetailResponse create(@Valid @RequestBody ListingCreateRequest request) {
         return listingService.create(request);
@@ -39,32 +39,32 @@ public class ListingController {
 
         photoService.uploadPhotos(listingId, photos);
     }
-    @GetMapping("/search/house")
+    @GetMapping("/house")
     public List<ListingResponse> searchHouse(@ModelAttribute HouseSearchRequest request) {
         return propertySearchService.searchHousing(request);
     }
 
-    @GetMapping("/search/commercial")
+    @GetMapping("/commercial")
     public List<ListingResponse> searchCommercial(@ModelAttribute CommercialSearchRequest request) {
         return propertySearchService.searchCommercial(request);
     }
 
-    @GetMapping("/search/office")
+    @GetMapping("/office")
     public List<ListingResponse> searchOffice(@ModelAttribute OfficeSearchRequest request) {
         return propertySearchService.searchOffice(request);
     }
 
-    @GetMapping("/search/industrial")
+    @GetMapping("/industrial")
     public List<ListingResponse> searchIndustrial(@ModelAttribute IndustrialSearchRequest request) {
         return propertySearchService.searchIndustrial(request);
     }
 
-    @GetMapping("/search/service")
+    @GetMapping("/service")
     public List<ListingResponse> searchService(@ModelAttribute ServiceSearchRequest request) {
         return propertySearchService.searchService(request);
     }
 
-    @GetMapping("/search/land")
+    @GetMapping("/land")
     public List<ListingResponse> searchLand(@ModelAttribute LandSearchRequest request) {
         return propertySearchService.searchLand(request);
     }
