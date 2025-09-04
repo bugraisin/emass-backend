@@ -1,9 +1,11 @@
 package com.emass.emass_backend.service.mapper;
 import com.emass.emass_backend.model.dto.listing.ListingCreateRequest;
+import com.emass.emass_backend.model.dto.listing.ListingDetailResponse;
 import com.emass.emass_backend.model.dto.listing.ListingResponse;
 import com.emass.emass_backend.model.entity.listing.Listing;
 import com.emass.emass_backend.model.entity.listing.details.*;
 import org.springframework.stereotype.Component;
+import com.emass.emass_backend.model.dto.listing.PhotoResponse;
 
 @Component
 public class ListingMapper {
@@ -26,11 +28,31 @@ public class ListingMapper {
         return listing;
     }
 
-    /** KONUT detayıyla birlikte response üretir. */
-    public ListingResponse toResponse(Listing l, HousingDetails d) {
-        if (l == null) return null;
+    public ListingResponse toSearchResponse(Listing listing) {
+        if (listing == null) return null;
 
         return new ListingResponse(
+                listing.getId(),
+                listing.getOwner().getId(),
+                listing.getTitle(),
+                listing.getDescription(),
+                listing.getStatus(),
+                listing.getPrice(),
+                listing.getCity(),
+                listing.getDistrict(),
+                listing.getNeighborhood(),
+                listing.getLatitude(),
+                listing.getLongitude(),
+                listing.getCreatedAt(),
+                listing.getThumbnailUrl()
+        );
+    }
+
+    /** KONUT detayıyla birlikte response üretir. */
+    public ListingDetailResponse toResponse(Listing l, HousingDetails d) {
+        if (l == null) return null;
+
+        return new ListingDetailResponse(
                 l.getId(),
                 l.getOwner() != null ? l.getOwner().getId() : null,
                 l.getTitle(),
@@ -46,9 +68,16 @@ public class ListingMapper {
                 l.getLongitude(),
                 l.getCreatedAt(),
                 l.getUpdatedAt(),
+                l.getPhotos() != null ? l.getPhotos().stream()
+                        .map(p -> new PhotoResponse(
+                                p.getId(),
+                                p.getFullImageUrl(),
+                                p.getSeqNumber()
+                        ))
+                        .toList() : null,
 
                 // HousingDetailsResponse
-                d == null ? null : new ListingResponse.HousingDetailsResponse(
+                d == null ? null : new ListingDetailResponse.HousingDetailsResponse(
                         d.getSubtype(),
                         d.getRoomCount(),
                         d.getGrossArea(),
@@ -93,290 +122,300 @@ public class ListingMapper {
     }
 
     /** TİCARİ detayıyla birlikte response üretir. */
-    public ListingResponse toResponse(Listing l, CommercialDetails d) {
-        if (l == null) return null;
-
-        return new ListingResponse(
-                l.getId(),
-                l.getOwner() != null ? l.getOwner().getId() : null,
-                l.getTitle(),
-                l.getDescription(),
-                l.getListingType(),
-                l.getPropertyType(),
-                l.getStatus(),
-                l.getPrice(),
-                l.getCity(),
-                l.getDistrict(),
-                l.getNeighborhood(),
-                l.getLatitude(),
-                l.getLongitude(),
-                l.getCreatedAt(),
-                l.getUpdatedAt(),
-
-                null, // housingDetails
-                // CommercialDetailsResponse
-                d == null ? null : new ListingResponse.CommercialDetailsResponse(
-                        d.getSubtype(),
-                        d.getGrossArea(),
-                        d.getNetArea(),
-                        d.getBuildingAge(),
-                        d.getFloorNo(),
-                        d.getFloorCount(),
-                        d.getHeatingType(),
-                        d.getSiteFee(),
-                        d.getDeposit(),
-                        d.getBuildingType(),
-                        d.getFurnished(),
-                        d.getParking(),
-                        d.getSecurity(),
-                        d.getElevator(),
-                        d.getGenerator(),
-                        d.getAirConditioning(),
-                        d.getInternet(),
-                        d.getKitchen(),
-                        d.getToilet(),
-                        d.getShowcase(),
-                        d.getWarehouse(),
-                        d.getLoadingDock(),
-                        d.getCashRegister(),
-                        d.getOutdoorSeating(),
-                        d.getWaitingArea(),
-                        d.getChangingRoom()
-                ),
-                null, null, null, null
-        );
+    public ListingDetailResponse toResponse(Listing l, CommercialDetails d) {
+//        if (l == null) return null;
+//
+//        return new ListingDetailResponse(
+//                l.getId(),
+//                l.getOwner() != null ? l.getOwner().getId() : null,
+//                l.getTitle(),
+//                l.getDescription(),
+//                l.getListingType(),
+//                l.getPropertyType(),
+//                l.getStatus(),
+//                l.getPrice(),
+//                l.getCity(),
+//                l.getDistrict(),
+//                l.getNeighborhood(),
+//                l.getLatitude(),
+//                l.getLongitude(),
+//                l.getCreatedAt(),
+//                l.getUpdatedAt(),
+//                l.getPhotos(),
+//
+//                null, // housingDetails
+//                // CommercialDetailsResponse
+//                d == null ? null : new ListingDetailResponse.CommercialDetailsResponse(
+//                        d.getSubtype(),
+//                        d.getGrossArea(),
+//                        d.getNetArea(),
+//                        d.getBuildingAge(),
+//                        d.getFloorNo(),
+//                        d.getFloorCount(),
+//                        d.getHeatingType(),
+//                        d.getSiteFee(),
+//                        d.getDeposit(),
+//                        d.getBuildingType(),
+//                        d.getFurnished(),
+//                        d.getParking(),
+//                        d.getSecurity(),
+//                        d.getElevator(),
+//                        d.getGenerator(),
+//                        d.getAirConditioning(),
+//                        d.getInternet(),
+//                        d.getKitchen(),
+//                        d.getToilet(),
+//                        d.getShowcase(),
+//                        d.getWarehouse(),
+//                        d.getLoadingDock(),
+//                        d.getCashRegister(),
+//                        d.getOutdoorSeating(),
+//                        d.getWaitingArea(),
+//                        d.getChangingRoom()
+//                ),
+//                null, null, null, null
+//        );
+        return null;
     }
 
     /** OFİS detayıyla birlikte response üretir. */
-    public ListingResponse toResponse(Listing l, OfficeDetails d) {
-        if (l == null) return null;
-
-        return new ListingResponse(
-                l.getId(),
-                l.getOwner() != null ? l.getOwner().getId() : null,
-                l.getTitle(),
-                l.getDescription(),
-                l.getListingType(),
-                l.getPropertyType(),
-                l.getStatus(),
-                l.getPrice(),
-                l.getCity(),
-                l.getDistrict(),
-                l.getNeighborhood(),
-                l.getLatitude(),
-                l.getLongitude(),
-                l.getCreatedAt(),
-                l.getUpdatedAt(),
-
-                null, // housingDetails
-                null, // commercialDetails
-                // OfficeDetailsResponse
-                d == null ? null : new ListingResponse.OfficeDetailsResponse(
-                        d.getSubtype(),
-                        d.getGrossArea(),
-                        d.getNetArea(),
-                        d.getBuildingAge(),
-                        d.getRoomCount(),
-                        d.getFloorNo(),
-                        d.getFloorCount(),
-                        d.getHeatingType(),
-                        d.getSiteFee(),
-                        d.getDeposit(),
-                        d.getBuildingType(),
-                        d.getFurnished(),
-                        d.getParking(),
-                        d.getElevator(),
-                        d.getSecurity(),
-                        d.getGenerator(),
-                        d.getAirConditioning(),
-                        d.getInternet(),
-                        d.getKitchen(),
-                        d.getFireSystem(),
-                        d.getReception(),
-                        d.getWaitingArea(),
-                        d.getMeetingRoom(),
-                        d.getArchive(),
-                        d.getLibrary(),
-                        d.getServerRoom(),
-                        d.getAccessControl(),
-                        d.getFiberInternet(),
-                        d.getSoundproof()
-                ),
-                null, null, null
-        );
+    public ListingDetailResponse toResponse(Listing l, OfficeDetails d) {
+//        if (l == null) return null;
+//
+//        return new ListingDetailResponse(
+//                l.getId(),
+//                l.getOwner() != null ? l.getOwner().getId() : null,
+//                l.getTitle(),
+//                l.getDescription(),
+//                l.getListingType(),
+//                l.getPropertyType(),
+//                l.getStatus(),
+//                l.getPrice(),
+//                l.getCity(),
+//                l.getDistrict(),
+//                l.getNeighborhood(),
+//                l.getLatitude(),
+//                l.getLongitude(),
+//                l.getCreatedAt(),
+//                l.getUpdatedAt(),
+//                l.getPhotos(),
+//
+//                null, // housingDetails
+//                null, // commercialDetails
+//                // OfficeDetailsResponse
+//                d == null ? null : new ListingDetailResponse.OfficeDetailsResponse(
+//                        d.getSubtype(),
+//                        d.getGrossArea(),
+//                        d.getNetArea(),
+//                        d.getBuildingAge(),
+//                        d.getRoomCount(),
+//                        d.getFloorNo(),
+//                        d.getFloorCount(),
+//                        d.getHeatingType(),
+//                        d.getSiteFee(),
+//                        d.getDeposit(),
+//                        d.getBuildingType(),
+//                        d.getFurnished(),
+//                        d.getParking(),
+//                        d.getElevator(),
+//                        d.getSecurity(),
+//                        d.getGenerator(),
+//                        d.getAirConditioning(),
+//                        d.getInternet(),
+//                        d.getKitchen(),
+//                        d.getFireSystem(),
+//                        d.getReception(),
+//                        d.getWaitingArea(),
+//                        d.getMeetingRoom(),
+//                        d.getArchive(),
+//                        d.getLibrary(),
+//                        d.getServerRoom(),
+//                        d.getAccessControl(),
+//                        d.getFiberInternet(),
+//                        d.getSoundproof()
+//                ),
+//                null, null, null
+//        );
+        return null;
     }
 
     /** ENDÜSTRİYEL detayıyla birlikte response üretir. */
-    public ListingResponse toResponse(Listing l, IndustrialDetails d) {
-        if (l == null) return null;
-
-        return new ListingResponse(
-                l.getId(),
-                l.getOwner() != null ? l.getOwner().getId() : null,
-                l.getTitle(),
-                l.getDescription(),
-                l.getListingType(),
-                l.getPropertyType(),
-                l.getStatus(),
-                l.getPrice(),
-                l.getCity(),
-                l.getDistrict(),
-                l.getNeighborhood(),
-                l.getLatitude(),
-                l.getLongitude(),
-                l.getCreatedAt(),
-                l.getUpdatedAt(),
-
-                null, // housingDetails
-                null, // commercialDetails
-                null, // officeDetails
-                // IndustrialDetailsResponse
-                d == null ? null : new ListingResponse.IndustrialDetailsResponse(
-                        d.getSubtype(),
-                        d.getGrossArea(),
-                        d.getNetArea(),
-                        d.getBuildingAge(),
-                        d.getRoomCount(),
-                        d.getFloorCount(),
-                        d.getCeilingHeight(),
-                        d.getSiteFee(),
-                        d.getDeposit(),
-                        d.getThreephaseElectricity(),
-                        d.getNaturalGasLine(),
-                        d.getSteamLine(),
-                        d.getWaterSystem(),
-                        d.getWasteWaterSystem(),
-                        d.getCraneSystem(),
-                        d.getVentilationSystem(),
-                        d.getAirConditioning(),
-                        d.getWideOpenArea(),
-                        d.getMachineMountingSuitable(),
-                        d.getLoadingRamp(),
-                        d.getTruckEntrance(),
-                        d.getForkliftTraffic(),
-                        d.getRackingSystem(),
-                        d.getColdStorage(),
-                        d.getFireExtinguishingSystem(),
-                        d.getSecurityCameras(),
-                        d.getAlarmSystem(),
-                        d.getFencedArea(),
-                        d.getSecurity()
-                ),
-                null, null
-        );
+    public ListingDetailResponse toResponse(Listing l, IndustrialDetails d) {
+//        if (l == null) return null;
+//
+//        return new ListingDetailResponse(
+//                l.getId(),
+//                l.getOwner() != null ? l.getOwner().getId() : null,
+//                l.getTitle(),
+//                l.getDescription(),
+//                l.getListingType(),
+//                l.getPropertyType(),
+//                l.getStatus(),
+//                l.getPrice(),
+//                l.getCity(),
+//                l.getDistrict(),
+//                l.getNeighborhood(),
+//                l.getLatitude(),
+//                l.getLongitude(),
+//                l.getCreatedAt(),
+//                l.getUpdatedAt(),
+//                l.getPhotos(),
+//
+//                null, // housingDetails
+//                null, // commercialDetails
+//                null, // officeDetails
+//                // IndustrialDetailsResponse
+//                d == null ? null : new ListingDetailResponse.IndustrialDetailsResponse(
+//                        d.getSubtype(),
+//                        d.getGrossArea(),
+//                        d.getNetArea(),
+//                        d.getBuildingAge(),
+//                        d.getRoomCount(),
+//                        d.getFloorCount(),
+//                        d.getCeilingHeight(),
+//                        d.getSiteFee(),
+//                        d.getDeposit(),
+//                        d.getThreephaseElectricity(),
+//                        d.getNaturalGasLine(),
+//                        d.getSteamLine(),
+//                        d.getWaterSystem(),
+//                        d.getWasteWaterSystem(),
+//                        d.getCraneSystem(),
+//                        d.getVentilationSystem(),
+//                        d.getAirConditioning(),
+//                        d.getWideOpenArea(),
+//                        d.getMachineMountingSuitable(),
+//                        d.getLoadingRamp(),
+//                        d.getTruckEntrance(),
+//                        d.getForkliftTraffic(),
+//                        d.getRackingSystem(),
+//                        d.getColdStorage(),
+//                        d.getFireExtinguishingSystem(),
+//                        d.getSecurityCameras(),
+//                        d.getAlarmSystem(),
+//                        d.getFencedArea(),
+//                        d.getSecurity()
+//                ),
+//                null, null
+//        );
+        return null;
     }
 
     /** HİZMET detayıyla birlikte response üretir. */
-    public ListingResponse toResponse(Listing l, ServiceDetails d) {
-        if (l == null) return null;
-
-        return new ListingResponse(
-                l.getId(),
-                l.getOwner() != null ? l.getOwner().getId() : null,
-                l.getTitle(),
-                l.getDescription(),
-                l.getListingType(),
-                l.getPropertyType(),
-                l.getStatus(),
-                l.getPrice(),
-                l.getCity(),
-                l.getDistrict(),
-                l.getNeighborhood(),
-                l.getLatitude(),
-                l.getLongitude(),
-                l.getCreatedAt(),
-                l.getUpdatedAt(),
-
-                null, // housingDetails
-                null, // commercialDetails
-                null, // officeDetails
-                null, // industrialDetails
-                // ServiceDetailsResponse
-                d == null ? null : new ListingResponse.ServiceDetailsResponse(
-                        d.getSubtype(),
-                        d.getGrossArea(),
-                        d.getNetArea(),
-                        d.getCapacity(),
-                        d.getSpaceType(),
-                        d.getDeposit(),
-                        d.getSecurity(),
-                        d.getLighting(),
-                        d.getCctv(),
-                        d.getInternet(),
-                        d.getReception(),
-                        d.getRestRoom(),
-                        d.getKitchen(),
-                        d.getWashingArea(),
-                        d.getMaintenanceArea(),
-                        d.getAirConditioning(),
-                        d.getVentilationSystem(),
-                        d.getStorage(),
-                        d.getOfficeArea(),
-                        d.getCustomerParking()
-                ),
-                null  // landDetails
-        );
+    public ListingDetailResponse toResponse(Listing l, ServiceDetails d) {
+//        if (l == null) return null;
+//
+//        return new ListingDetailResponse(
+//                l.getId(),
+//                l.getOwner() != null ? l.getOwner().getId() : null,
+//                l.getTitle(),
+//                l.getDescription(),
+//                l.getListingType(),
+//                l.getPropertyType(),
+//                l.getStatus(),
+//                l.getPrice(),
+//                l.getCity(),
+//                l.getDistrict(),
+//                l.getNeighborhood(),
+//                l.getLatitude(),
+//                l.getLongitude(),
+//                l.getCreatedAt(),
+//                l.getUpdatedAt(),
+//                l.getPhotos(),
+//
+//                null, // housingDetails
+//                null, // commercialDetails
+//                null, // officeDetails
+//                null, // industrialDetails
+//                // ServiceDetailsResponse
+//                d == null ? null : new ListingDetailResponse.ServiceDetailsResponse(
+//                        d.getSubtype(),
+//                        d.getGrossArea(),
+//                        d.getNetArea(),
+//                        d.getCapacity(),
+//                        d.getSpaceType(),
+//                        d.getDeposit(),
+//                        d.getSecurity(),
+//                        d.getLighting(),
+//                        d.getCctv(),
+//                        d.getInternet(),
+//                        d.getReception(),
+//                        d.getRestRoom(),
+//                        d.getKitchen(),
+//                        d.getWashingArea(),
+//                        d.getMaintenanceArea(),
+//                        d.getAirConditioning(),
+//                        d.getVentilationSystem(),
+//                        d.getStorage(),
+//                        d.getOfficeArea(),
+//                        d.getCustomerParking()
+//                ),
+//                null  // landDetails
+//        );
+        return null;
     }
 
     /** ARSA detayıyla birlikte response üretir. */
-    public ListingResponse toResponse(Listing l, LandDetails d) {
-        if (l == null) return null;
-
-        return new ListingResponse(
-                l.getId(),
-                l.getOwner() != null ? l.getOwner().getId() : null,
-                l.getTitle(),
-                l.getDescription(),
-                l.getListingType(),
-                l.getPropertyType(),
-                l.getStatus(),
-                l.getPrice(),
-                l.getCity(),
-                l.getDistrict(),
-                l.getNeighborhood(),
-                l.getLatitude(),
-                l.getLongitude(),
-                l.getCreatedAt(),
-                l.getUpdatedAt(),
-
-                null, // housingDetails
-                null, // commercialDetails
-                null, // officeDetails
-                null, // industrialDetails
-                null, // serviceDetails
-                // LandDetailsResponse
-                d == null ? null : new ListingResponse.LandDetailsResponse(
-                        d.getSubtype(),
-                        d.getLandArea(),
-                        d.getZoningStatus(),
-                        d.getAdaNo(),
-                        d.getParcelNo(),
-                        d.getPaftaNo(),
-                        d.getKaks(),
-                        d.getGabari(),
-                        d.getTapuStatus(),
-                        d.getElectricity(),
-                        d.getWater(),
-                        d.getNaturalGas(),
-                        d.getSewerage(),
-                        d.getRoadAccess(),
-                        d.getCornerLot(),
-                        d.getSeaView(),
-                        d.getCityView(),
-                        d.getForestView(),
-                        d.getMountainView(),
-                        d.getFlat(),
-                        d.getSlope(),
-                        d.getFenced(),
-                        d.getAgricultural(),
-                        d.getBuildingPermit(),
-                        d.getVineyard(),
-                        d.getOrchard(),
-                        d.getOliveTrees(),
-                        d.getGreenhouse(),
-                        d.getWell()
-                )
-        );
+    public ListingDetailResponse toResponse(Listing l, LandDetails d) {
+//        if (l == null) return null;
+//
+//        return new ListingDetailResponse(
+//                l.getId(),
+//                l.getOwner() != null ? l.getOwner().getId() : null,
+//                l.getTitle(),
+//                l.getDescription(),
+//                l.getListingType(),
+//                l.getPropertyType(),
+//                l.getStatus(),
+//                l.getPrice(),
+//                l.getCity(),
+//                l.getDistrict(),
+//                l.getNeighborhood(),
+//                l.getLatitude(),
+//                l.getLongitude(),
+//                l.getCreatedAt(),
+//                l.getUpdatedAt(),
+//                l.getPhotos(),
+//
+//                null, // housingDetails
+//                null, // commercialDetails
+//                null, // officeDetails
+//                null, // industrialDetails
+//                null, // serviceDetails
+//                // LandDetailsResponse
+//                d == null ? null : new ListingDetailResponse.LandDetailsResponse(
+//                        d.getSubtype(),
+//                        d.getLandArea(),
+//                        d.getZoningStatus(),
+//                        d.getAdaNo(),
+//                        d.getParcelNo(),
+//                        d.getPaftaNo(),
+//                        d.getKaks(),
+//                        d.getGabari(),
+//                        d.getTapuStatus(),
+//                        d.getElectricity(),
+//                        d.getWater(),
+//                        d.getNaturalGas(),
+//                        d.getSewerage(),
+//                        d.getRoadAccess(),
+//                        d.getCornerLot(),
+//                        d.getSeaView(),
+//                        d.getCityView(),
+//                        d.getForestView(),
+//                        d.getMountainView(),
+//                        d.getFlat(),
+//                        d.getSlope(),
+//                        d.getFenced(),
+//                        d.getAgricultural(),
+//                        d.getBuildingPermit(),
+//                        d.getVineyard(),
+//                        d.getOrchard(),
+//                        d.getOliveTrees(),
+//                        d.getGreenhouse(),
+//                        d.getWell()
+//                )
+//        );
+        return null;
     }
 }
 

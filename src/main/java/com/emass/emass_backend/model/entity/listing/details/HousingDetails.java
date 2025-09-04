@@ -18,7 +18,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class HousingDetails {
+public class HousingDetails implements PropertyDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -156,4 +156,9 @@ public class HousingDetails {
 
     @Column(name = "sports_area")
     private Boolean sportsArea;
+
+    @Override
+    public Listing getListing() {
+        return this.listing;
+    }
 }

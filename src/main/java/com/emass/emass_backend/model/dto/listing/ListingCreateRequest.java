@@ -3,8 +3,10 @@ package com.emass.emass_backend.model.dto.listing;
 import com.emass.emass_backend.model.dto.listing.details.*;
 import com.emass.emass_backend.model.entity.enums.ListingType;
 import com.emass.emass_backend.model.entity.enums.PropertyType;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public record ListingCreateRequest(
         Long ownerId,
@@ -18,6 +20,7 @@ public record ListingCreateRequest(
         String neighborhood,
         Double latitude,
         Double longitude,
+        List<MultipartFile> photos,
 
         // Conditional details - sadece biri dolu olacak
         HousingDetailsRequest housingDetails,
