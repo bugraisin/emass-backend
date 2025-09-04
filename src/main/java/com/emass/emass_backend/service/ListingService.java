@@ -1,17 +1,19 @@
 package com.emass.emass_backend.service;
 
 import com.emass.emass_backend.model.dto.listing.ListingCreateRequest;
-import com.emass.emass_backend.model.dto.listing.ListingResponse;
+import com.emass.emass_backend.model.dto.listing.ListingDetailResponse;
 import com.emass.emass_backend.model.entity.listing.Listing;
+import com.emass.emass_backend.model.entity.listing.ListingPhoto;
 import com.emass.emass_backend.model.entity.listing.details.*;
+import com.emass.emass_backend.repository.ListingPhotoRepository;
 import com.emass.emass_backend.repository.ListingRepository;
 import com.emass.emass_backend.repository.UserRepository;
 import com.emass.emass_backend.repository.details.*;
 import com.emass.emass_backend.service.mapper.ListingDetailsMapper;
 import com.emass.emass_backend.service.mapper.ListingMapper;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -28,12 +30,13 @@ public class ListingService {
     private final IndustrialDetailsRepository industrialDetailsRepository;
     private final ServiceDetailsRepository serviceDetailsRepository;
     private final LandDetailsRepository landDetailsRepository;
+    private final ListingPhotoRepository listingPhotoRepository;
 
     private final ListingMapper listingMapper;
     private final ListingDetailsMapper detailsMapper;
 
     @Transactional
-    public ListingResponse create(ListingCreateRequest req) {
+    public ListingDetailResponse create(ListingCreateRequest req) {
 
         var owner = userRepository.findById(req.ownerId())
                 .orElseThrow(() -> new IllegalArgumentException("Owner not found: " + req.ownerId()));
@@ -77,9 +80,13 @@ public class ListingService {
         };
     }
 
-    public ListingResponse getById(Long id) {
+    @Transactional(readOnly = true)
+    public ListingDetailResponse getById(Long id) {
         Listing listing = listingRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Listing not found: " + id));
+
+        List<ListingPhoto> photos = listingPhotoRepository.findByListingIdOrderBySeqNumberAsc(id);
+        listing.setPhotos(photos);
 
         // YENİ: 6 kategori için switch-case
         return switch (listing.getPropertyType()) {
@@ -110,7 +117,7 @@ public class ListingService {
         };
     }
 
-    public List<ListingResponse> getAll() {
+    public List<ListingDetailResponse> getAll() {
         List<Listing> listings = listingRepository.findAll();
 
         return listings.stream().map(listing -> {

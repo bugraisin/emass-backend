@@ -13,7 +13,7 @@ import java.math.BigDecimal;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LandDetails {
+public class LandDetails implements PropertyDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

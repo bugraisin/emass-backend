@@ -10,6 +10,8 @@ import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "listings")
@@ -64,6 +66,9 @@ public class Listing {
     @Column(nullable = false)
     private Integer viewsCount = 0;
 
+    @Column
+    private String thumbnailUrl;
+
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
 
@@ -84,4 +89,7 @@ public class Listing {
 
     @OneToOne(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private LandDetails landDetails;
+
+    @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<ListingPhoto> photos = new ArrayList<>();
 }

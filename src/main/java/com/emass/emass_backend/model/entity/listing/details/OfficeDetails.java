@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor@Builder
-public class OfficeDetails {
+public class OfficeDetails implements PropertyDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
