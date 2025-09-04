@@ -120,6 +120,70 @@ public class ListingMapper {
                 null, null, null, null, null
         );
     }
+    /** OFİS detayıyla birlikte response üretir. */
+    public ListingDetailResponse toResponse(Listing l, OfficeDetails d) {
+        if (l == null) return null;
+
+        return new ListingDetailResponse(
+                l.getId(),
+                l.getOwner() != null ? l.getOwner().getId() : null,
+                l.getTitle(),
+                l.getDescription(),
+                l.getListingType(),
+                l.getPropertyType(),
+                l.getStatus(),
+                l.getPrice(),
+                l.getCity(),
+                l.getDistrict(),
+                l.getNeighborhood(),
+                l.getLatitude(),
+                l.getLongitude(),
+                l.getCreatedAt(),
+                l.getUpdatedAt(),
+                l.getPhotos() != null ? l.getPhotos().stream()
+                        .map(p -> new PhotoResponse(
+                                p.getId(),
+                                p.getFullImageUrl(),
+                                p.getSeqNumber()
+                        ))
+                        .toList() : null,
+
+                null,
+                null,
+                d == null ? null : new ListingDetailResponse.OfficeDetailsResponse(
+                        d.getSubtype(),
+                        d.getGrossArea(),
+                        d.getNetArea(),
+                        d.getBuildingAge(),
+                        d.getRoomCount(),
+                        d.getFloorNo(),
+                        d.getFloorCount(),
+                        d.getHeatingType(),
+                        d.getSiteFee(),
+                        d.getDeposit(),
+                        d.getBuildingType(),
+                        d.getFurnished(),
+                        d.getParking(),
+                        d.getElevator(),
+                        d.getSecurity(),
+                        d.getGenerator(),
+                        d.getAirConditioning(),
+                        d.getInternet(),
+                        d.getKitchen(),
+                        d.getFireSystem(),
+                        d.getReception(),
+                        d.getWaitingArea(),
+                        d.getMeetingRoom(),
+                        d.getArchive(),
+                        d.getLibrary(),
+                        d.getServerRoom(),
+                        d.getAccessControl(),
+                        d.getFiberInternet(),
+                        d.getSoundproof()
+                ),
+                null, null, null
+        );
+    }
 
     /** TİCARİ detayıyla birlikte response üretir. */
     public ListingDetailResponse toResponse(Listing l, CommercialDetails d) {
@@ -174,67 +238,6 @@ public class ListingMapper {
 //                        d.getChangingRoom()
 //                ),
 //                null, null, null, null
-//        );
-        return null;
-    }
-
-    /** OFİS detayıyla birlikte response üretir. */
-    public ListingDetailResponse toResponse(Listing l, OfficeDetails d) {
-//        if (l == null) return null;
-//
-//        return new ListingDetailResponse(
-//                l.getId(),
-//                l.getOwner() != null ? l.getOwner().getId() : null,
-//                l.getTitle(),
-//                l.getDescription(),
-//                l.getListingType(),
-//                l.getPropertyType(),
-//                l.getStatus(),
-//                l.getPrice(),
-//                l.getCity(),
-//                l.getDistrict(),
-//                l.getNeighborhood(),
-//                l.getLatitude(),
-//                l.getLongitude(),
-//                l.getCreatedAt(),
-//                l.getUpdatedAt(),
-//                l.getPhotos(),
-//
-//                null, // housingDetails
-//                null, // commercialDetails
-//                // OfficeDetailsResponse
-//                d == null ? null : new ListingDetailResponse.OfficeDetailsResponse(
-//                        d.getSubtype(),
-//                        d.getGrossArea(),
-//                        d.getNetArea(),
-//                        d.getBuildingAge(),
-//                        d.getRoomCount(),
-//                        d.getFloorNo(),
-//                        d.getFloorCount(),
-//                        d.getHeatingType(),
-//                        d.getSiteFee(),
-//                        d.getDeposit(),
-//                        d.getBuildingType(),
-//                        d.getFurnished(),
-//                        d.getParking(),
-//                        d.getElevator(),
-//                        d.getSecurity(),
-//                        d.getGenerator(),
-//                        d.getAirConditioning(),
-//                        d.getInternet(),
-//                        d.getKitchen(),
-//                        d.getFireSystem(),
-//                        d.getReception(),
-//                        d.getWaitingArea(),
-//                        d.getMeetingRoom(),
-//                        d.getArchive(),
-//                        d.getLibrary(),
-//                        d.getServerRoom(),
-//                        d.getAccessControl(),
-//                        d.getFiberInternet(),
-//                        d.getSoundproof()
-//                ),
-//                null, null, null
 //        );
         return null;
     }

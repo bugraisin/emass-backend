@@ -16,8 +16,12 @@ public class HousingSpecifications {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            // 1. Listing alanları (join ile)
+            // 1. Listing alanları
             Join<HousingDetails, Listing> listingJoin = root.join("listing", JoinType.INNER);
+
+            if(request.listingType() != null)
+                predicates.add(cb.equal(listingJoin.get("listingType"), request.listingType()));
+
             if(request.city() != null)
                 predicates.add(cb.equal(listingJoin.get("city"), request.city()));
 

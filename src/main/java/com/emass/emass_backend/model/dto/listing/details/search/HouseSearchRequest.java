@@ -1,5 +1,6 @@
 package com.emass.emass_backend.model.dto.listing.details.search;
 
+import com.emass.emass_backend.model.entity.enums.ListingType;
 import com.emass.emass_backend.model.entity.enums.details.FacadeDirection;
 import com.emass.emass_backend.model.entity.enums.details.HeatingType;
 import com.emass.emass_backend.model.entity.enums.HousingSubtype;
@@ -10,6 +11,8 @@ import java.util.List;
 
 public record HouseSearchRequest(
         // Listing filtreleri (Address bileşeninden)
+
+        ListingType listingType,
         String city,
         List<String> district,
         List<String> neighborhood,
@@ -43,7 +46,7 @@ public record HouseSearchRequest(
         BigDecimal maxDeposit,
 
         // Isıtma türü (çoklu seçim)
-        List<String> heatingTypes,  // ["DOGALGAZ", "KOMBI", "KALORIFER", "KLIMA", "SOBALI", "YOK"]
+        List<HeatingType> heatingTypes,  // ["DOGALGAZ", "KOMBI", "KALORIFER", "KLIMA", "SOBALI", "YOK"]
 
         // Cephe yönü (çoklu seçim)
         List<FacadeDirection> facadeDirections,// ["Kuzey", "Güney", "Doğu", "Batı", "Kuzey-Doğu", "Kuzey-Batı", "Güney-Doğu", "Güney-Batı"]
