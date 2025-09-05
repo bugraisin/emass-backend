@@ -1,11 +1,7 @@
 package com.emass.emass_backend.model.dto.listing;
 
 import com.emass.emass_backend.model.entity.enums.*;
-import com.emass.emass_backend.model.entity.enums.details.HeatingType;
-import com.emass.emass_backend.model.entity.enums.details.BuildingType;
-import com.emass.emass_backend.model.entity.enums.details.FacadeDirection;
-import com.emass.emass_backend.model.entity.enums.details.TitleDeedStatus;
-import com.emass.emass_backend.model.entity.enums.details.UsageStatus;
+import com.emass.emass_backend.model.entity.enums.details.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -176,7 +172,7 @@ public record ListingDetailResponse(
             Integer grossArea,
             Integer netArea,
             Integer capacity,
-            String spaceType,
+            SpaceType spaceType,
             BigDecimal deposit,
             Boolean security,
             Boolean lighting,

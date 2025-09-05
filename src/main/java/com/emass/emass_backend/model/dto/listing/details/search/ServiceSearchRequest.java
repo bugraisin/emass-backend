@@ -1,49 +1,61 @@
 package com.emass.emass_backend.model.dto.listing.details.search;
 
+import com.emass.emass_backend.model.entity.enums.HousingSubtype;
 import com.emass.emass_backend.model.entity.enums.ListingStatus;
+import com.emass.emass_backend.model.entity.enums.ListingType;
 import com.emass.emass_backend.model.entity.enums.ServiceSubtype;
+import com.emass.emass_backend.model.entity.enums.details.SpaceType;
+import jakarta.persistence.Column;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 public record ServiceSearchRequest(
         // Listing filtreleri
+
+        ListingType listingType,
         String city,
-        String district,
-        String neighborhood,
+        List<String> district,
+        List<String> neighborhood,
+
+        // Price filtreleri (Price bileşeninden)
         BigDecimal minPrice,
         BigDecimal maxPrice,
         ListingStatus status,
 
         // ServiceDetails filtreleri
         ServiceSubtype subtype,
-        Integer minTotalArea,
-        Integer maxTotalArea,
-        Integer minCoveredArea,
-        Integer maxCoveredArea,
-        Integer minVehicleCapacity,
-        Integer maxVehicleCapacity,
-        String coverType,
-        Integer minHeightLimit,
-        Integer maxHeightLimit,
-        Boolean valetService,
-        Boolean equipmentIncluded,
-        Integer minChangingRoomCount,
-        Integer maxChangingRoomCount,
-        Integer minShowerCount,
-        Integer maxShowerCount,
-        Boolean sauna,
-        Integer minWashBayCount,
-        Integer maxWashBayCount,
-        Boolean automaticSystem,
-        Integer minLiftCount,
-        Integer maxLiftCount,
-        Integer minLiftCapacity,
-        Integer maxLiftCapacity,
-        Boolean paintBooth,
-        Integer minPumpCount,
-        Integer maxPumpCount,
-        String fuelTypes,
-        Boolean convenienceStore,
+        // Alan filtreleri
+        Integer minNetArea,
+        Integer maxNetArea,
+
+        Integer minCapacity,
+        Integer maxCapacity,
+
+        List<SpaceType> spaceTypes,
+
+        BigDecimal minDeposit,
+        BigDecimal maxDeposit,
+
+        // Temel Altyapı
         Boolean security,
-        Boolean lighting
+        Boolean lighting,
+        Boolean cctv,
+        Boolean internet,
+
+        // Hizmet Alanları
+        Boolean reception,
+        Boolean restRoom,
+        Boolean kitchen,
+
+        // Teknik Donanım
+        Boolean washingArea,
+        Boolean maintenanceArea,
+        Boolean airConditioning,
+        Boolean ventilationSystem,
+
+        // Ek Hizmetler
+        Boolean storage,
+        Boolean officeArea,
+        Boolean customerParking
 ) {}
