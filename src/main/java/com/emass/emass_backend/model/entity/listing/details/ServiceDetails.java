@@ -1,5 +1,6 @@
 package com.emass.emass_backend.model.entity.listing.details;
 
+import com.emass.emass_backend.model.entity.enums.details.SpaceType;
 import com.emass.emass_backend.model.entity.listing.Listing;
 import com.emass.emass_backend.model.entity.enums.ServiceSubtype;
 import jakarta.persistence.*;
@@ -37,7 +38,7 @@ public class ServiceDetails implements PropertyDetails {
     private Integer capacity;
 
     @Column(name = "space_type")
-    private String spaceType;
+    private SpaceType spaceType;
 
     @Column(name = "deposit")
     private BigDecimal deposit;

@@ -310,56 +310,60 @@ public class ListingMapper {
 
     /** HİZMET detayıyla birlikte response üretir. */
     public ListingDetailResponse toResponse(Listing l, ServiceDetails d) {
-//        if (l == null) return null;
-//
-//        return new ListingDetailResponse(
-//                l.getId(),
-//                l.getOwner() != null ? l.getOwner().getId() : null,
-//                l.getTitle(),
-//                l.getDescription(),
-//                l.getListingType(),
-//                l.getPropertyType(),
-//                l.getStatus(),
-//                l.getPrice(),
-//                l.getCity(),
-//                l.getDistrict(),
-//                l.getNeighborhood(),
-//                l.getLatitude(),
-//                l.getLongitude(),
-//                l.getCreatedAt(),
-//                l.getUpdatedAt(),
-//                l.getPhotos(),
-//
-//                null, // housingDetails
-//                null, // commercialDetails
-//                null, // officeDetails
-//                null, // industrialDetails
-//                // ServiceDetailsResponse
-//                d == null ? null : new ListingDetailResponse.ServiceDetailsResponse(
-//                        d.getSubtype(),
-//                        d.getGrossArea(),
-//                        d.getNetArea(),
-//                        d.getCapacity(),
-//                        d.getSpaceType(),
-//                        d.getDeposit(),
-//                        d.getSecurity(),
-//                        d.getLighting(),
-//                        d.getCctv(),
-//                        d.getInternet(),
-//                        d.getReception(),
-//                        d.getRestRoom(),
-//                        d.getKitchen(),
-//                        d.getWashingArea(),
-//                        d.getMaintenanceArea(),
-//                        d.getAirConditioning(),
-//                        d.getVentilationSystem(),
-//                        d.getStorage(),
-//                        d.getOfficeArea(),
-//                        d.getCustomerParking()
-//                ),
-//                null  // landDetails
-//        );
-        return null;
+        if (l == null) return null;
+
+        return new ListingDetailResponse(
+                l.getId(),
+                l.getOwner() != null ? l.getOwner().getId() : null,
+                l.getTitle(),
+                l.getDescription(),
+                l.getListingType(),
+                l.getPropertyType(),
+                l.getStatus(),
+                l.getPrice(),
+                l.getCity(),
+                l.getDistrict(),
+                l.getNeighborhood(),
+                l.getLatitude(),
+                l.getLongitude(),
+                l.getCreatedAt(),
+                l.getUpdatedAt(),
+                l.getPhotos() != null ? l.getPhotos().stream()
+                        .map(p -> new PhotoResponse(
+                                p.getId(),
+                                p.getFullImageUrl(),
+                                p.getSeqNumber()
+                        ))
+                        .toList() : null,
+
+                null,
+                null,
+                null,
+                null,
+                d == null ? null : new ListingDetailResponse.ServiceDetailsResponse(
+                        d.getSubtype(),
+                        d.getGrossArea(),
+                        d.getNetArea(),
+                        d.getCapacity(),
+                        d.getSpaceType(),
+                        d.getDeposit(),
+                        d.getSecurity(),
+                        d.getLighting(),
+                        d.getCctv(),
+                        d.getInternet(),
+                        d.getReception(),
+                        d.getRestRoom(),
+                        d.getKitchen(),
+                        d.getWashingArea(),
+                        d.getMaintenanceArea(),
+                        d.getAirConditioning(),
+                        d.getVentilationSystem(),
+                        d.getStorage(),
+                        d.getOfficeArea(),
+                        d.getCustomerParking()
+                ),
+                null
+        );
     }
 
     /** ARSA detayıyla birlikte response üretir. */

@@ -2,6 +2,7 @@ package com.emass.emass_backend.service.details.specifications;
 
 import com.emass.emass_backend.model.dto.listing.details.search.ServiceSearchRequest;
 import com.emass.emass_backend.model.entity.listing.Listing;
+import com.emass.emass_backend.model.entity.listing.details.HousingDetails;
 import com.emass.emass_backend.model.entity.listing.details.ServiceDetails;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
@@ -17,84 +18,86 @@ public class ServiceSpecifications {
         return (root, query, cb) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            // 1. ServiceDetails alanları
-            if(request.subtype() != null)
-                predicates.add(cb.equal(root.get("subtype"), request.subtype()));
-            if(request.minTotalArea() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("totalArea"), request.minTotalArea()));
-            if(request.maxTotalArea() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("totalArea"), request.maxTotalArea()));
-            if(request.minCoveredArea() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("coveredArea"), request.minCoveredArea()));
-            if(request.maxCoveredArea() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("coveredArea"), request.maxCoveredArea()));
-            if(request.minVehicleCapacity() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("vehicleCapacity"), request.minVehicleCapacity()));
-            if(request.maxVehicleCapacity() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("vehicleCapacity"), request.maxVehicleCapacity()));
-            if(request.coverType() != null)
-                predicates.add(cb.like(cb.lower(root.get("coverType")), "%" + request.coverType().toLowerCase() + "%"));
-            if(request.minHeightLimit() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("heightLimit"), request.minHeightLimit()));
-            if(request.maxHeightLimit() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("heightLimit"), request.maxHeightLimit()));
-            if(request.valetService() != null)
-                predicates.add(cb.equal(root.get("valetService"), request.valetService()));
-            if(request.equipmentIncluded() != null)
-                predicates.add(cb.equal(root.get("equipmentIncluded"), request.equipmentIncluded()));
-            if(request.minChangingRoomCount() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("changingRoomCount"), request.minChangingRoomCount()));
-            if(request.maxChangingRoomCount() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("changingRoomCount"), request.maxChangingRoomCount()));
-            if(request.minShowerCount() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("showerCount"), request.minShowerCount()));
-            if(request.maxShowerCount() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("showerCount"), request.maxShowerCount()));
-            if(request.sauna() != null)
-                predicates.add(cb.equal(root.get("sauna"), request.sauna()));
-            if(request.minWashBayCount() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("washBayCount"), request.minWashBayCount()));
-            if(request.maxWashBayCount() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("washBayCount"), request.maxWashBayCount()));
-            if(request.automaticSystem() != null)
-                predicates.add(cb.equal(root.get("automaticSystem"), request.automaticSystem()));
-            if(request.minLiftCount() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("liftCount"), request.minLiftCount()));
-            if(request.maxLiftCount() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("liftCount"), request.maxLiftCount()));
-            if(request.minLiftCapacity() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("liftCapacity"), request.minLiftCapacity()));
-            if(request.maxLiftCapacity() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("liftCapacity"), request.maxLiftCapacity()));
-            if(request.paintBooth() != null)
-                predicates.add(cb.equal(root.get("paintBooth"), request.paintBooth()));
-            if(request.minPumpCount() != null)
-                predicates.add(cb.greaterThanOrEqualTo(root.get("pumpCount"), request.minPumpCount()));
-            if(request.maxPumpCount() != null)
-                predicates.add(cb.lessThanOrEqualTo(root.get("pumpCount"), request.maxPumpCount()));
-            if(request.fuelTypes() != null)
-                predicates.add(cb.like(cb.lower(root.get("fuelTypes")), "%" + request.fuelTypes().toLowerCase() + "%"));
-            if(request.convenienceStore() != null)
-                predicates.add(cb.equal(root.get("convenienceStore"), request.convenienceStore()));
-            if(request.security() != null)
-                predicates.add(cb.equal(root.get("security"), request.security()));
-            if(request.lighting() != null)
-                predicates.add(cb.equal(root.get("lighting"), request.lighting()));
+            // 1. Listing alanları
+            Join<HousingDetails, Listing> listingJoin = root.join("listing", JoinType.INNER);
 
-            // 2. Listing alanları (join ile)
-            Join<ServiceDetails, Listing> listingJoin = root.join("listing", JoinType.INNER);
+            if(request.listingType() != null)
+                predicates.add(cb.equal(listingJoin.get("listingType"), request.listingType()));
+
             if(request.city() != null)
                 predicates.add(cb.equal(listingJoin.get("city"), request.city()));
-            if(request.district() != null)
-                predicates.add(cb.equal(listingJoin.get("district"), request.district()));
-            if(request.neighborhood() != null)
-                predicates.add(cb.equal(listingJoin.get("neighborhood"), request.neighborhood()));
+
+            if(request.district() != null && !request.district().isEmpty())
+                predicates.add(listingJoin.get("district").in(request.district()));
+
+            if(request.neighborhood() != null && !request.neighborhood().isEmpty())
+                predicates.add(listingJoin.get("neighborhood").in(request.neighborhood()));
+
             if(request.minPrice() != null)
                 predicates.add(cb.greaterThanOrEqualTo(listingJoin.get("price"), request.minPrice()));
             if(request.maxPrice() != null)
                 predicates.add(cb.lessThanOrEqualTo(listingJoin.get("price"), request.maxPrice()));
             if(request.status() != null)
                 predicates.add(cb.equal(listingJoin.get("status"), request.status()));
+
+            // 2. HousingDetails alanları
+            if(request.subtype() != null)
+                predicates.add(cb.equal(root.get("subtype"), request.subtype()));
+
+            if(request.minNetArea() != null)
+                predicates.add(cb.greaterThanOrEqualTo(root.get("netArea"), request.minNetArea()));
+            if(request.maxNetArea() != null)
+                predicates.add(cb.lessThanOrEqualTo(root.get("netArea"), request.maxNetArea()));
+
+            if(request.minCapacity() != null)
+                predicates.add(cb.greaterThanOrEqualTo(root.get("capacity"), request.minCapacity()));
+            if(request.maxCapacity() != null)
+                predicates.add(cb.lessThanOrEqualTo(root.get("capacity"), request.maxCapacity()));
+
+            if(request.spaceTypes() != null && !request.spaceTypes().isEmpty())
+                predicates.add(root.get("spaceType").in(request.spaceTypes()));
+
+            // Deposit aralığı
+            if(request.minDeposit() != null)
+                predicates.add(cb.greaterThanOrEqualTo(root.get("deposit"), request.minDeposit()));
+            if(request.maxDeposit() != null)
+                predicates.add(cb.lessThanOrEqualTo(root.get("deposit"), request.maxDeposit()));
+
+            // Temel Altyapı
+            if(request.security() != null)
+                predicates.add(cb.equal(root.get("furnished"), request.security()));
+            if(request.lighting() != null)
+                predicates.add(cb.equal(root.get("lighting"), request.lighting()));
+            if(request.cctv() != null)
+                predicates.add(cb.equal(root.get("cctv"), request.cctv()));
+            if(request.internet() != null)
+                predicates.add(cb.equal(root.get("internet"), request.internet()));
+
+            // Hizmet Alanları
+            if(request.reception() != null)
+                predicates.add(cb.equal(root.get("reception"), request.reception()));
+            if(request.restRoom() != null)
+                predicates.add(cb.equal(root.get("restRoom"), request.restRoom()));
+            if(request.kitchen() != null)
+                predicates.add(cb.equal(root.get("kitchen"), request.kitchen()));
+
+            // Teknik Donanım
+            if(request.washingArea() != null)
+                predicates.add(cb.equal(root.get("washingArea"), request.washingArea()));
+            if(request.maintenanceArea() != null)
+                predicates.add(cb.equal(root.get("maintenanceArea"), request.maintenanceArea()));
+            if(request.airConditioning() != null)
+                predicates.add(cb.equal(root.get("airConditioning"), request.airConditioning()));
+            if(request.ventilationSystem() != null)
+                predicates.add(cb.equal(root.get("ventilationSystem"), request.ventilationSystem()));
+
+            // Ek Hizmetler
+            if(request.storage() != null)
+                predicates.add(cb.equal(root.get("storage"), request.storage()));
+            if(request.officeArea() != null)
+                predicates.add(cb.equal(root.get("officeArea"), request.officeArea()));
+            if(request.customerParking() != null)
+                predicates.add(cb.equal(root.get("customerParking"), request.customerParking()));
 
             // Tüm filtreleri AND ile birleştir
             return cb.and(predicates.toArray(new Predicate[0]));
