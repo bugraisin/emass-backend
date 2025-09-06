@@ -77,7 +77,7 @@ public class ListingController {
 
     @GetMapping("/get-all")
     @ResponseStatus(HttpStatus.OK)
-    public List<ListingDetailResponse> getAll() {
+    public List<ListingResponse> getAll() {
         return listingService.getAll();
     }
 

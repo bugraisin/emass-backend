@@ -2,6 +2,7 @@ package com.emass.emass_backend.service;
 
 import com.emass.emass_backend.model.dto.listing.ListingCreateRequest;
 import com.emass.emass_backend.model.dto.listing.ListingDetailResponse;
+import com.emass.emass_backend.model.dto.listing.ListingResponse;
 import com.emass.emass_backend.model.entity.listing.Listing;
 import com.emass.emass_backend.model.entity.listing.ListingPhoto;
 import com.emass.emass_backend.model.entity.listing.details.*;
@@ -117,40 +118,12 @@ public class ListingService {
         };
     }
 
-    public List<ListingDetailResponse> getAll() {
+    public List<ListingResponse> getAll() {
         List<Listing> listings = listingRepository.findAll();
 
-        return listings.stream().map(listing -> {
-            Long id = listing.getId();
-
-            // YENİ: 6 kategori için switch-case
-            return switch (listing.getPropertyType()) {
-                case KONUT -> {
-                    HousingDetails d = housingDetailsRepository.findByListingId(id).orElse(null);
-                    yield listingMapper.toResponse(listing, d);
-                }
-                case TICARI -> {
-                    CommercialDetails d = commercialDetailsRepository.findByListingId(id).orElse(null);
-                    yield listingMapper.toResponse(listing, d);
-                }
-                case OFIS -> {
-                    OfficeDetails d = officeDetailsRepository.findByListingId(id).orElse(null);
-                    yield listingMapper.toResponse(listing, d);
-                }
-                case ENDUSTRIYEL -> {
-                    IndustrialDetails d = industrialDetailsRepository.findByListingId(id).orElse(null);
-                    yield listingMapper.toResponse(listing, d);
-                }
-                case HIZMET -> {
-                    ServiceDetails d = serviceDetailsRepository.findByListingId(id).orElse(null);
-                    yield listingMapper.toResponse(listing, d);
-                }
-                case ARSA -> {
-                    LandDetails d = landDetailsRepository.findByListingId(id).orElse(null);
-                    yield listingMapper.toResponse(listing, d);
-                }
-            };
-        }).toList();
+        return listings.stream()
+                .map(listingMapper::toSearchResponse)
+                .toList();
     }
 
     public void deleteListing(Long id) {
