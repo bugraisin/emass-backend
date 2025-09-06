@@ -145,7 +145,6 @@ public record ListingDetailResponse(
             Integer roomCount,
             Integer floorCount,
             BigDecimal ceilingHeight,
-            BigDecimal siteFee,
             BigDecimal deposit,
             Boolean threephaseElectricity,
             Boolean naturalGasLine,

@@ -40,7 +40,7 @@ public class LandSpecifications {
             if(request.status() != null)
                 predicates.add(cb.equal(listingJoin.get("status"), request.status()));
 
-            // 2. HousingDetails alanları
+            // 2. HousingDetails alanlarıüğ
             if(request.subtype() != null)
                 predicates.add(cb.equal(root.get("subtype"), request.subtype()));
 
@@ -54,7 +54,6 @@ public class LandSpecifications {
 
             if(request.titleLandDeedStatus() != null && !request.titleLandDeedStatus().isEmpty())
                 predicates.add(root.get("titleLandDeedStatus").in(request.zoningStatus()));
-
 
             if(request.electricity() != null)
                 predicates.add(cb.equal(root.get("electricity"), request.electricity()));

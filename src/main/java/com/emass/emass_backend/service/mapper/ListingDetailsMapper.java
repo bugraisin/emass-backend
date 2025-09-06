@@ -136,7 +136,6 @@ public class ListingDetailsMapper {
                 .roomCount(req.roomCount())
                 .floorCount(req.floorCount())
                 .ceilingHeight(req.ceilingHeight())
-                .siteFee(req.siteFee())
                 .deposit(req.deposit())
                 .threephaseElectricity(req.threephaseElectricity())
                 .naturalGasLine(req.naturalGasLine())
