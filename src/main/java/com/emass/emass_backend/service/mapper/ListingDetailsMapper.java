@@ -202,7 +202,7 @@ public class ListingDetailsMapper {
                 .paftaNo(req.paftaNo())
                 .kaks(req.kaks())
                 .gabari(req.gabari())
-                .tapuStatus(req.tapuStatus())
+                .titleLandDeedStatus(req.titleLandDeedStatus())
                 .electricity(req.electricity())
                 .water(req.water())
                 .naturalGas(req.naturalGas())

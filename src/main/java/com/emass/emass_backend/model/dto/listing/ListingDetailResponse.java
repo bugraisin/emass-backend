@@ -2,6 +2,8 @@ package com.emass.emass_backend.model.dto.listing;
 
 import com.emass.emass_backend.model.entity.enums.*;
 import com.emass.emass_backend.model.entity.enums.details.*;
+import com.emass.emass_backend.model.entity.enums.details.land.TitleLandDeedStatus;
+import com.emass.emass_backend.model.entity.enums.details.land.ZoningStatus;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -193,13 +195,13 @@ public record ListingDetailResponse(
     public record LandDetailsResponse(
             LandSubtype subtype,
             Integer landArea,
-            String zoningStatus,
+            ZoningStatus zoningStatus,
             Integer adaNo,
             Integer parcelNo,
             String paftaNo,
             BigDecimal kaks,
             BigDecimal gabari,
-            String tapuStatus,
+            TitleLandDeedStatus titleLandDeedStatus,
             Boolean electricity,
             Boolean water,
             Boolean naturalGas,

@@ -11,10 +11,9 @@ import java.util.List;
 
 public record CommercialSearchRequest(
         ListingType listingType,
-        // Listing filtreleri
         String city,
-        String district,
-        String neighborhood,
+        List<String> district,
+        List<String> neighborhood,
         BigDecimal minPrice,
         BigDecimal maxPrice,
         ListingStatus status,
