@@ -248,64 +248,68 @@ public class ListingMapper {
 
     /** ENDÜSTRİYEL detayıyla birlikte response üretir. */
     public ListingDetailResponse toResponse(Listing l, IndustrialDetails d) {
-//        if (l == null) return null;
-//
-//        return new ListingDetailResponse(
-//                l.getId(),
-//                l.getOwner() != null ? l.getOwner().getId() : null,
-//                l.getTitle(),
-//                l.getDescription(),
-//                l.getListingType(),
-//                l.getPropertyType(),
-//                l.getStatus(),
-//                l.getPrice(),
-//                l.getCity(),
-//                l.getDistrict(),
-//                l.getNeighborhood(),
-//                l.getLatitude(),
-//                l.getLongitude(),
-//                l.getCreatedAt(),
-//                l.getUpdatedAt(),
-//                l.getPhotos(),
-//
-//                null, // housingDetails
-//                null, // commercialDetails
-//                null, // officeDetails
-//                // IndustrialDetailsResponse
-//                d == null ? null : new ListingDetailResponse.IndustrialDetailsResponse(
-//                        d.getSubtype(),
-//                        d.getGrossArea(),
-//                        d.getNetArea(),
-//                        d.getBuildingAge(),
-//                        d.getRoomCount(),
-//                        d.getFloorCount(),
-//                        d.getCeilingHeight(),
-//                        d.getSiteFee(),
-//                        d.getDeposit(),
-//                        d.getThreephaseElectricity(),
-//                        d.getNaturalGasLine(),
-//                        d.getSteamLine(),
-//                        d.getWaterSystem(),
-//                        d.getWasteWaterSystem(),
-//                        d.getCraneSystem(),
-//                        d.getVentilationSystem(),
-//                        d.getAirConditioning(),
-//                        d.getWideOpenArea(),
-//                        d.getMachineMountingSuitable(),
-//                        d.getLoadingRamp(),
-//                        d.getTruckEntrance(),
-//                        d.getForkliftTraffic(),
-//                        d.getRackingSystem(),
-//                        d.getColdStorage(),
-//                        d.getFireExtinguishingSystem(),
-//                        d.getSecurityCameras(),
-//                        d.getAlarmSystem(),
-//                        d.getFencedArea(),
-//                        d.getSecurity()
-//                ),
-//                null, null
-//        );
-        return null;
+        if (l == null) return null;
+
+        return new ListingDetailResponse(
+                l.getId(),
+                l.getOwner() != null ? l.getOwner().getId() : null,
+                l.getTitle(),
+                l.getDescription(),
+                l.getListingType(),
+                l.getPropertyType(),
+                l.getStatus(),
+                l.getPrice(),
+                l.getCity(),
+                l.getDistrict(),
+                l.getNeighborhood(),
+                l.getLatitude(),
+                l.getLongitude(),
+                l.getCreatedAt(),
+                l.getUpdatedAt(),
+                l.getPhotos() != null ? l.getPhotos().stream()
+                        .map(p -> new PhotoResponse(
+                                p.getId(),
+                                p.getFullImageUrl(),
+                                p.getSeqNumber()
+                        ))
+                        .toList() : null,
+
+                null, // housingDetails
+                null, // commercialDetails
+                null, // officeDetails
+                // IndustrialDetailsResponse
+                d == null ? null : new ListingDetailResponse.IndustrialDetailsResponse(
+                        d.getSubtype(),
+                        d.getGrossArea(),
+                        d.getNetArea(),
+                        d.getBuildingAge(),
+                        d.getRoomCount(),
+                        d.getFloorCount(),
+                        d.getCeilingHeight(),
+                        d.getDeposit(),
+                        d.getThreephaseElectricity(),
+                        d.getNaturalGasLine(),
+                        d.getSteamLine(),
+                        d.getWaterSystem(),
+                        d.getWasteWaterSystem(),
+                        d.getCraneSystem(),
+                        d.getVentilationSystem(),
+                        d.getAirConditioning(),
+                        d.getWideOpenArea(),
+                        d.getMachineMountingSuitable(),
+                        d.getLoadingRamp(),
+                        d.getTruckEntrance(),
+                        d.getForkliftTraffic(),
+                        d.getRackingSystem(),
+                        d.getColdStorage(),
+                        d.getFireExtinguishingSystem(),
+                        d.getSecurityCameras(),
+                        d.getAlarmSystem(),
+                        d.getFencedArea(),
+                        d.getSecurity()
+                ),
+                null, null
+        );
     }
 
     /** HİZMET detayıyla birlikte response üretir. */

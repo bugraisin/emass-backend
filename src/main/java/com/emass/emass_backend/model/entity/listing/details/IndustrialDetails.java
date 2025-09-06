@@ -46,9 +46,6 @@ public class IndustrialDetails implements PropertyDetails {
     @Column(name = "ceiling_height")
     private BigDecimal ceilingHeight;
 
-    @Column(name = "site_fee")
-    private BigDecimal siteFee;
-
     @Column(name = "deposit")
     private BigDecimal deposit;
 
