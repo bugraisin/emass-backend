@@ -1,19 +1,21 @@
 package com.emass.emass_backend.model.dto.listing.details;
 
 import com.emass.emass_backend.model.entity.enums.LandSubtype;
+import com.emass.emass_backend.model.entity.enums.details.land.TitleLandDeedStatus;
+import com.emass.emass_backend.model.entity.enums.details.land.ZoningStatus;
 
 import java.math.BigDecimal;
 
 public record LandDetailsRequest(
         LandSubtype subtype,
         Integer landArea,
-        String zoningStatus,
+        ZoningStatus zoningStatus,
         Integer adaNo,
         Integer parcelNo,
         String paftaNo,
         BigDecimal kaks,
         BigDecimal gabari,
-        String tapuStatus,
+        TitleLandDeedStatus titleLandDeedStatus,
         Boolean electricity,
         Boolean water,
         Boolean naturalGas,

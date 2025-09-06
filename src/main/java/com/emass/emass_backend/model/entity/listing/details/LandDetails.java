@@ -1,5 +1,7 @@
 package com.emass.emass_backend.model.entity.listing.details;
 
+import com.emass.emass_backend.model.entity.enums.details.land.TitleLandDeedStatus;
+import com.emass.emass_backend.model.entity.enums.details.land.ZoningStatus;
 import com.emass.emass_backend.model.entity.listing.Listing;
 import com.emass.emass_backend.model.entity.enums.LandSubtype;
 import jakarta.persistence.*;
@@ -32,7 +34,7 @@ public class LandDetails implements PropertyDetails {
     private Integer landArea;
 
     @Column(name = "zoning_status")
-    private String zoningStatus;
+    private ZoningStatus zoningStatus;
 
     @Column(name = "ada_no")
     private Integer adaNo;
@@ -49,8 +51,8 @@ public class LandDetails implements PropertyDetails {
     @Column(name = "gabari")
     private BigDecimal gabari;
 
-    @Column(name = "tapu_status")
-    private String tapuStatus;
+    @Column(name = "title_land_deed_status")
+    private TitleLandDeedStatus titleLandDeedStatus;
 
     // Altyapı
     @Column(name = "electricity")

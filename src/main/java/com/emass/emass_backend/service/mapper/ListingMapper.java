@@ -368,65 +368,70 @@ public class ListingMapper {
 
     /** ARSA detayıyla birlikte response üretir. */
     public ListingDetailResponse toResponse(Listing l, LandDetails d) {
-//        if (l == null) return null;
-//
-//        return new ListingDetailResponse(
-//                l.getId(),
-//                l.getOwner() != null ? l.getOwner().getId() : null,
-//                l.getTitle(),
-//                l.getDescription(),
-//                l.getListingType(),
-//                l.getPropertyType(),
-//                l.getStatus(),
-//                l.getPrice(),
-//                l.getCity(),
-//                l.getDistrict(),
-//                l.getNeighborhood(),
-//                l.getLatitude(),
-//                l.getLongitude(),
-//                l.getCreatedAt(),
-//                l.getUpdatedAt(),
-//                l.getPhotos(),
-//
-//                null, // housingDetails
-//                null, // commercialDetails
-//                null, // officeDetails
-//                null, // industrialDetails
-//                null, // serviceDetails
-//                // LandDetailsResponse
-//                d == null ? null : new ListingDetailResponse.LandDetailsResponse(
-//                        d.getSubtype(),
-//                        d.getLandArea(),
-//                        d.getZoningStatus(),
-//                        d.getAdaNo(),
-//                        d.getParcelNo(),
-//                        d.getPaftaNo(),
-//                        d.getKaks(),
-//                        d.getGabari(),
-//                        d.getTapuStatus(),
-//                        d.getElectricity(),
-//                        d.getWater(),
-//                        d.getNaturalGas(),
-//                        d.getSewerage(),
-//                        d.getRoadAccess(),
-//                        d.getCornerLot(),
-//                        d.getSeaView(),
-//                        d.getCityView(),
-//                        d.getForestView(),
-//                        d.getMountainView(),
-//                        d.getFlat(),
-//                        d.getSlope(),
-//                        d.getFenced(),
-//                        d.getAgricultural(),
-//                        d.getBuildingPermit(),
-//                        d.getVineyard(),
-//                        d.getOrchard(),
-//                        d.getOliveTrees(),
-//                        d.getGreenhouse(),
-//                        d.getWell()
-//                )
-//        );
-        return null;
+        if (l == null) return null;
+
+        return new ListingDetailResponse(
+                l.getId(),
+                l.getOwner() != null ? l.getOwner().getId() : null,
+                l.getTitle(),
+                l.getDescription(),
+                l.getListingType(),
+                l.getPropertyType(),
+                l.getStatus(),
+                l.getPrice(),
+                l.getCity(),
+                l.getDistrict(),
+                l.getNeighborhood(),
+                l.getLatitude(),
+                l.getLongitude(),
+                l.getCreatedAt(),
+                l.getUpdatedAt(),
+                l.getPhotos() != null ? l.getPhotos().stream()
+                        .map(p -> new PhotoResponse(
+                                p.getId(),
+                                p.getFullImageUrl(),
+                                p.getSeqNumber()
+                        ))
+                        .toList() : null,
+
+                null, // housingDetails
+                null, // commercialDetails
+                null, // officeDetails
+                null, // industrialDetails
+                null, // serviceDetails
+                // LandDetailsResponse
+                d == null ? null : new ListingDetailResponse.LandDetailsResponse(
+                        d.getSubtype(),
+                        d.getLandArea(),
+                        d.getZoningStatus(),
+                        d.getAdaNo(),
+                        d.getParcelNo(),
+                        d.getPaftaNo(),
+                        d.getKaks(),
+                        d.getGabari(),
+                        d.getTitleLandDeedStatus(),
+                        d.getElectricity(),
+                        d.getWater(),
+                        d.getNaturalGas(),
+                        d.getSewerage(),
+                        d.getRoadAccess(),
+                        d.getCornerLot(),
+                        d.getSeaView(),
+                        d.getCityView(),
+                        d.getForestView(),
+                        d.getMountainView(),
+                        d.getFlat(),
+                        d.getSlope(),
+                        d.getFenced(),
+                        d.getAgricultural(),
+                        d.getBuildingPermit(),
+                        d.getVineyard(),
+                        d.getOrchard(),
+                        d.getOliveTrees(),
+                        d.getGreenhouse(),
+                        d.getWell()
+                )
+        );
     }
 }
 
