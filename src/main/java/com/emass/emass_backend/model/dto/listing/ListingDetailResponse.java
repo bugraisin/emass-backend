@@ -26,13 +26,7 @@ public record ListingDetailResponse(
         LocalDateTime createdAt,
         LocalDateTime updatedAt,
         List<PhotoResponse> photoUrls,
-
-        HousingDetailsResponse housingDetails,
-        CommercialDetailsResponse commercialDetails,
-        OfficeDetailsResponse officeDetails,
-        IndustrialDetailsResponse industrialDetails,
-        ServiceDetailsResponse serviceDetails,
-        LandDetailsResponse landDetails
+        Object details
 ) {
 
     public record HousingDetailsResponse(

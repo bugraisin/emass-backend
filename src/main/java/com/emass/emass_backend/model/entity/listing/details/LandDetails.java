@@ -33,6 +33,7 @@ public class LandDetails implements PropertyDetails {
     @Column(name = "land_area")
     private Integer landArea;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "zoning_status")
     private ZoningStatus zoningStatus;
 
@@ -51,6 +52,7 @@ public class LandDetails implements PropertyDetails {
     @Column(name = "gabari")
     private BigDecimal gabari;
 
+    @Enumerated(EnumType.STRING)
     @Column(name = "title_land_deed_status")
     private TitleLandDeedStatus titleLandDeedStatus;
 
