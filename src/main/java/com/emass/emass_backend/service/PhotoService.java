@@ -2,8 +2,8 @@ package com.emass.emass_backend.service;
 
 import com.emass.emass_backend.model.entity.listing.Listing;
 import com.emass.emass_backend.model.entity.listing.ListingPhoto;
-import com.emass.emass_backend.repository.ListingPhotoRepository;
-import com.emass.emass_backend.repository.ListingRepository;
+import com.emass.emass_backend.repository.listing.ListingPhotoRepository;
+import com.emass.emass_backend.repository.listing.ListingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;

@@ -1,4 +1,4 @@
-package com.emass.emass_backend.repository;
+package com.emass.emass_backend.repository.location;
 
 import com.emass.emass_backend.model.entity.location.Province;
 import org.springframework.data.jpa.repository.JpaRepository;

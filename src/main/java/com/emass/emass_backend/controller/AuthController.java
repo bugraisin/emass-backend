@@ -2,7 +2,6 @@ package com.emass.emass_backend.controller;
 
 import com.emass.emass_backend.model.dto.auth.LoginRequest;
 import com.emass.emass_backend.model.dto.auth.RegisterRequest;
-import com.emass.emass_backend.model.entity.User;
 import com.emass.emass_backend.service.AuthService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -20,24 +19,27 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest req) {
         try {
-            service.register(req);
-            return ResponseEntity.ok().build();
+            String token = service.register(req);
+            return ResponseEntity.ok(new AuthResponse("Kayıt başarılı", token));
         } catch (IllegalStateException e) {
-            return ResponseEntity.status(409).body(e.getMessage());
+            return ResponseEntity.status(409).body(new ErrorResponse(e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(new ErrorResponse("Bir hata oluştu"));
         }
     }
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest req) {
         try {
-            User u = service.login(req);
-            // Şimdilik basit response
-            return ResponseEntity.ok(new LoginResponse(u.getId(), u.getEmail(), u.getName()));
+            String token = service.login(req);
+            return ResponseEntity.ok(new AuthResponse("Giriş başarılı", token));
         } catch (IllegalArgumentException e) {
-            return ResponseEntity.status(401).body(e.getMessage());
+            return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(new ErrorResponse("Bir hata oluştu"));
         }
     }
 
-    // DTO: Login cevabı
-    public record LoginResponse(Long id, String email, String name) {}
+    public record AuthResponse(String message, String token) {}
+    public record ErrorResponse(String message) {}
 }

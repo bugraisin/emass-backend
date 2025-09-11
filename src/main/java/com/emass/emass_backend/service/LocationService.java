@@ -4,10 +4,10 @@ import com.emass.emass_backend.model.entity.location.District;
 import com.emass.emass_backend.model.entity.location.Neighborhood;
 import com.emass.emass_backend.model.entity.location.Province;
 import com.emass.emass_backend.model.entity.location.Subdistrict;
-import com.emass.emass_backend.repository.DistrictRepository;
-import com.emass.emass_backend.repository.NeighborhoodRepository;
-import com.emass.emass_backend.repository.ProvinceRepository;
-import com.emass.emass_backend.repository.SubdistrictRepository;
+import com.emass.emass_backend.repository.location.DistrictRepository;
+import com.emass.emass_backend.repository.location.NeighborhoodRepository;
+import com.emass.emass_backend.repository.location.ProvinceRepository;
+import com.emass.emass_backend.repository.location.SubdistrictRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
