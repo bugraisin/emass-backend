@@ -1,5 +1,6 @@
 package com.emass.emass_backend.controller;
 
+import com.emass.emass_backend.model.dto.auth.AuthResponse;
 import com.emass.emass_backend.model.dto.auth.LoginRequest;
 import com.emass.emass_backend.model.dto.auth.RegisterRequest;
 import com.emass.emass_backend.service.AuthService;
@@ -19,8 +20,12 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<?> register(@Valid @RequestBody RegisterRequest req) {
         try {
-            String token = service.register(req);
-            return ResponseEntity.ok(new AuthResponse("Kayıt başarılı", token));
+            AuthResponse response = service.register(req);
+            return ResponseEntity.ok(new ApiResponse(
+                    "Kayıt başarılı",
+                    response.getToken(),
+                    response.getUser()
+            ));
         } catch (IllegalStateException e) {
             return ResponseEntity.status(409).body(new ErrorResponse(e.getMessage()));
         } catch (Exception e) {
@@ -31,8 +36,12 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<?> login(@Valid @RequestBody LoginRequest req) {
         try {
-            String token = service.login(req);
-            return ResponseEntity.ok(new AuthResponse("Giriş başarılı", token));
+            AuthResponse response = service.login(req);
+            return ResponseEntity.ok(new ApiResponse(
+                    "Giriş başarılı",
+                    response.getToken(),
+                    response.getUser()
+            ));
         } catch (IllegalArgumentException e) {
             return ResponseEntity.status(401).body(new ErrorResponse(e.getMessage()));
         } catch (Exception e) {
@@ -40,6 +49,6 @@ public class AuthController {
         }
     }
 
-    public record AuthResponse(String message, String token) {}
+    public record ApiResponse(String message, String token, AuthResponse.UserInfo user) {}
     public record ErrorResponse(String message) {}
 }

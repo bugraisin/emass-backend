@@ -1,5 +1,6 @@
 package com.emass.emass_backend.service;
 
+import com.emass.emass_backend.model.dto.auth.AuthResponse;
 import com.emass.emass_backend.model.dto.auth.LoginRequest;
 import com.emass.emass_backend.model.dto.auth.RegisterRequest;
 import com.emass.emass_backend.model.entity.User;
@@ -17,9 +18,9 @@ public class AuthService {
     private final PasswordEncoder encoder;
     private final JwtUtil jwtUtil;
 
-    public String register(RegisterRequest req) {
+    public AuthResponse register(RegisterRequest req) {
         if (repo.existsByEmail(req.email())) {
-            throw new IllegalStateException("Email already in use");
+            throw new IllegalStateException("Email kullanımda");
         }
         var user = User.builder()
                 .email(req.email())
@@ -29,17 +30,33 @@ public class AuthService {
                 .build();
 
         var savedUser = repo.save(user);
-        return jwtUtil.generateToken(savedUser);
+        String token = jwtUtil.generateToken(savedUser);
+
+        AuthResponse.UserInfo userInfo = new AuthResponse.UserInfo(
+                savedUser.getId(),
+                savedUser.getEmail(),
+                savedUser.getUsername()
+        );
+
+        return new AuthResponse(token, userInfo);
     }
 
-    public String login(LoginRequest req) {
+    public AuthResponse login(LoginRequest req) {
         var user = repo.findByEmail(req.email())
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new IllegalArgumentException("Kullanıcı bulunamadı"));
 
         if (!encoder.matches(req.password(), user.getPassword())) {
-            throw new IllegalArgumentException("Invalid password");
+            throw new IllegalArgumentException("Hatalı şifre");
         }
 
-        return jwtUtil.generateToken(user);
+        String token = jwtUtil.generateToken(user);
+
+        AuthResponse.UserInfo userInfo = new AuthResponse.UserInfo(
+                user.getId(),
+                user.getEmail(),
+                user.getUsername()
+        );
+
+        return new AuthResponse(token, userInfo);
     }
 }

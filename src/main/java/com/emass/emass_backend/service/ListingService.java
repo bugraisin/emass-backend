@@ -51,6 +51,15 @@ public class ListingService {
     }
 
     @Transactional(readOnly = true)
+    public List<ListingResponse> getByUserId(Long id) {
+        List<Listing> listings = listingRepository.findByOwnerId(id);
+
+        return listings.stream()
+                .map(listingMapper::toSearchResponse)
+                .toList();
+    }
+
+    @Transactional(readOnly = true)
     public List<ListingResponse> getAll() {
         List<Listing> listings = listingRepository.findAll();
 
@@ -115,4 +124,5 @@ public class ListingService {
             case ARSA -> listing.getLandDetails();
         };
     }
+
 }

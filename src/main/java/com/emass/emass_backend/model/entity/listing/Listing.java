@@ -92,4 +92,7 @@ public class Listing {
 
     @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ListingPhoto> photos = new ArrayList<>();
+
+    @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Favorites> favorites;
 }

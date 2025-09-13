@@ -39,6 +39,7 @@ public class ListingController {
 
         photoService.uploadPhotos(listingId, photos);
     }
+
     @GetMapping("/house")
     public List<ListingResponse> searchHouse(@ModelAttribute HouseSearchRequest request) {
         return propertySearchService.searchHousing(request);
@@ -73,6 +74,12 @@ public class ListingController {
     @ResponseStatus(HttpStatus.OK)
     public ListingDetailResponse getById(@PathVariable Long id) {
         return listingService.getById(id);
+    }
+
+    @GetMapping("/user/{userId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<ListingResponse> getByUserId(@PathVariable Long userId) {
+        return listingService.getByUserId(userId);
     }
 
     @GetMapping("/get-all")
