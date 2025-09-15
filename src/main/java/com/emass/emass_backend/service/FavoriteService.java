@@ -35,6 +35,10 @@ public class FavoriteService {
             throw new RuntimeException("Favorites already exists");
         }
 
+        if(listing.getOwner().getId().equals(user.getId())) {
+           throw new RuntimeException("Listing senin zaten");
+        }
+
         Favorites favorites = Favorites.builder()
                 .user(user)
                 .listing(listing)

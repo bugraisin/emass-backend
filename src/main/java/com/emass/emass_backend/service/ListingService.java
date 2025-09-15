@@ -3,6 +3,7 @@ package com.emass.emass_backend.service;
 import com.emass.emass_backend.model.dto.listing.ListingCreateRequest;
 import com.emass.emass_backend.model.dto.listing.ListingDetailResponse;
 import com.emass.emass_backend.model.dto.listing.ListingResponse;
+import com.emass.emass_backend.model.entity.enums.ListingStatus;
 import com.emass.emass_backend.model.entity.listing.Listing;
 import com.emass.emass_backend.model.entity.listing.details.*;
 import com.emass.emass_backend.repository.listing.ListingRepository;
@@ -59,9 +60,31 @@ public class ListingService {
                 .toList();
     }
 
+    @Transactional
+    public void updateListingStatus(Long id, ListingStatus status) {
+        Listing listing = listingRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Listing not found: " + id));
+
+        listing.setStatus(status);
+        listingRepository.save(listing);
+    }
+
+    @Transactional
+    public void toggleListingStatus(Long id) {
+        Listing listing = listingRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("Listing not found: " + id));
+
+        ListingStatus newStatus = listing.getStatus() == ListingStatus.PUBLISHED
+                ? ListingStatus.NON_PUBLISHED
+                : ListingStatus.PUBLISHED;
+
+        listing.setStatus(newStatus);
+        listingRepository.save(listing);
+    }
+
     @Transactional(readOnly = true)
     public List<ListingResponse> getAll() {
-        List<Listing> listings = listingRepository.findAll();
+        List<Listing> listings = listingRepository.findByStatus(ListingStatus.PUBLISHED);
 
         return listings.stream()
                 .map(listingMapper::toSearchResponse)

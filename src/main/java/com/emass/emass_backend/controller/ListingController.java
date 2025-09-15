@@ -3,7 +3,9 @@ package com.emass.emass_backend.controller;
 import com.emass.emass_backend.model.dto.listing.ListingCreateRequest;
 import com.emass.emass_backend.model.dto.listing.ListingDetailResponse;
 import com.emass.emass_backend.model.dto.listing.ListingResponse;
+import com.emass.emass_backend.model.dto.listing.PhotoResponse;
 import com.emass.emass_backend.model.dto.listing.details.search.*;
+import com.emass.emass_backend.model.entity.enums.ListingStatus;
 import com.emass.emass_backend.service.ListingService;
 import com.emass.emass_backend.service.PhotoService;
 import com.emass.emass_backend.service.details.*;
@@ -22,22 +24,12 @@ import java.util.List;
 public class ListingController {
 
     private final ListingService listingService;
-    private final PhotoService photoService;
     private final PropertySearchService propertySearchService;
 
     @PostMapping()
     @ResponseStatus(HttpStatus.CREATED)
     public ListingDetailResponse create(@Valid @RequestBody ListingCreateRequest request) {
         return listingService.create(request);
-    }
-
-    @PostMapping("/{listingId}/photos")
-    @ResponseStatus(HttpStatus.OK)
-    public void uploadPhotos(
-            @PathVariable Long listingId,
-            @RequestParam("photos") List<MultipartFile> photos) {
-
-        photoService.uploadPhotos(listingId, photos);
     }
 
     @GetMapping("/house")
@@ -92,5 +84,23 @@ public class ListingController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteListing(@PathVariable Long id) {
         listingService.deleteListing(id);
+    }
+
+    @PutMapping("/{id}/publish")
+    @ResponseStatus(HttpStatus.OK)
+    public void publishListing(@PathVariable Long id) {
+        listingService.updateListingStatus(id, ListingStatus.PUBLISHED);
+    }
+
+    @PutMapping("/{id}/unpublish")
+    @ResponseStatus(HttpStatus.OK)
+    public void unpublishListing(@PathVariable Long id) {
+        listingService.updateListingStatus(id, ListingStatus.NON_PUBLISHED);
+    }
+
+    @PutMapping("/{id}/toggle-status")
+    @ResponseStatus(HttpStatus.OK)
+    public void toggleListingStatus(@PathVariable Long id) {
+        listingService.toggleListingStatus(id);
     }
 }

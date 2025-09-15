@@ -45,23 +45,6 @@ public class S3Service {
         return amazonS3Client;
     }
 
-    // Fotoğraf yükleme
-    public String uploadPhoto(MultipartFile file) {
-        try {
-            String fileName = "listings/" + UUID.randomUUID() + "-" + file.getOriginalFilename();
-
-            ObjectMetadata metadata = new ObjectMetadata();
-            metadata.setContentLength(file.getSize());
-            metadata.setContentType(file.getContentType());
-
-            getS3Client().putObject(bucketName, fileName, file.getInputStream(), metadata);
-            return getS3Client().getUrl(bucketName, fileName).toString();
-
-        } catch (IOException e) {
-            throw new RuntimeException("Fotoğraf yüklenemedi: " + e.getMessage());
-        }
-    }
-
     // Byte array yükleme (thumbnail için)
     public String uploadBytes(String key, byte[] data, String contentType) {
         ObjectMetadata metadata = new ObjectMetadata();
