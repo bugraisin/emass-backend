@@ -8,10 +8,5 @@ import java.util.List;
 
 @Repository
 public interface ListingPhotoRepository extends JpaRepository<ListingPhoto, Long> {
-
-    List<ListingPhoto> findByListingIdOrderByIdAsc(Long listingId);
-
-    List<ListingPhoto> findByListingIdOrderBySeqNumberAsc(Long listingId);
-
-    Integer countByListingId(Long listingId);
+    List<ListingPhoto> findByListingIdOrderBySeqNumber(Long listingId);
 }

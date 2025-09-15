@@ -1,5 +1,6 @@
 package com.emass.emass_backend.controller;
 
+import com.emass.emass_backend.model.dto.listing.PhotoResponse;
 import com.emass.emass_backend.service.PhotoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -21,7 +22,13 @@ public class PhotoController {
     public void uploadPhotos(
             @PathVariable Long listingId,
             @RequestParam("photos") List<MultipartFile> photos) {
-
         photoService.uploadPhotos(listingId, photos);
     }
+
+    @GetMapping("/{listingId}")
+    @ResponseStatus(HttpStatus.OK)
+    public List<PhotoResponse> getListingPhotos(@PathVariable Long listingId) {
+        return photoService.getListingPhotos(listingId);
+    }
+
 }

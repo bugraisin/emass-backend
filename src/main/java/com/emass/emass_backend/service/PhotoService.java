@@ -1,11 +1,13 @@
 package com.emass.emass_backend.service;
 
+import com.emass.emass_backend.model.dto.listing.PhotoResponse;
 import com.emass.emass_backend.model.entity.listing.Listing;
 import com.emass.emass_backend.model.entity.listing.ListingPhoto;
 import com.emass.emass_backend.repository.listing.ListingPhotoRepository;
 import com.emass.emass_backend.repository.listing.ListingRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
@@ -15,6 +17,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -92,5 +95,17 @@ public class PhotoService {
         ImageIO.write(image, "jpg", baos);
         byte[] imageBytes = baos.toByteArray();
         s3Service.uploadBytes(key, imageBytes, "image/jpeg");
+    }
+
+    public List<PhotoResponse> getListingPhotos(Long listingId) {
+        List<ListingPhoto> photos = listingPhotoRepository.findByListingIdOrderBySeqNumber(listingId);
+
+        return photos.stream()
+                .map(photo -> new PhotoResponse(
+                        photo.getId(),
+                        photo.getFullImageUrl(),
+                        photo.getSeqNumber()
+                ))
+                .collect(Collectors.toList());
     }
 }
